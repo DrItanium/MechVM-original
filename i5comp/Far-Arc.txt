@@ -1,0 +1,74 @@
+Far MultiArc plugin script
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+U can now use Far to browse IS cabinets and do some basic operations.
+
+
+There are some limitations of course :
+--------------------------------------
+- MultiArc cannot add files to a subdir inside an archive, so u have
+  to work around by adding whole directories to the root of a cabinet,
+  which is a list of File Groups;
+
+- u cannot create File Groups;
+
+- u cannot create CABs, period;
+
+- i5comp will not extract empty directories by design
+
+- I'll think of some more and add them here in the next version ;)
+
+
+Some tips and pointers:
+-----------------------
+- to replace files, first create (or extract) the filegroup directory
+  and place all new files in there, then delete the corresponding files
+  from the CAB, and after that add the entire filegroup dir to the root
+  of the CAB
+
+- if u add a file to the cabinet and a file with this name/path already
+  exists - it will *NOT* be replaced, instead u will get yet another copy
+  of this file in a CAB
+
+- do not try adding single files to the root of the CAB - it won't work ;)
+
+
+To install the script:
+----------------------
+- edit the file <FarRoot>\Plugins\MultiArc\Formats\custom.ini
+
+- append the script (found at the bottom of this humble manual) to that
+  file, changing X in [TypeX] to the next available number
+
+- save the file
+
+
+That's it !
+U can change TypeName field to whatever u want but 'InstallShield'
+and u can extend the "nnnnnn..." placeholder if/when needed.
+
+
+Script follows:
+---------------
+
+[TypeX]
+TypeName=InstallShield5
+ID=49 53 63 28
+Extension=CAB
+List=i5comp l -o -f
+Format0="tt-dd-yyyy hh:mm zzzzzzzzz aaaa ppppppppp      nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+Extract=i5comp x -o -d -f %%AQ %%fQM
+ExtractWithoutPath=i5comp e -o -d -f %%AQ %%fQ
+Test=
+Delete=i5comp d -o -d -f %%AQ %%fQM
+Comment=
+CommentFiles=
+SFX=
+Lock=
+Protect=
+Recover=
+Add=i5comp a -o -f %%AQ %%fQ
+Move=
+AddRecurse=i5comp a -o -r -f %%AQ %%fQ
+MoveRecurse=
+AllFilesMask="*"

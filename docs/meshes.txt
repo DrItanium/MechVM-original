@@ -1,0 +1,41 @@
+Fehlende Funktionen:
+Mesh2::calculateNormals
+
+
+Überarbeitung erforderlich:
+MechWarriorIIPRJ::loadMesh
+Mesh2::loadFromObj
+
+
+Überarbeitet:
+BipedMech::addGeometry
+
+
+Neu:
+Mesh2::getMinCoords
+Mesh2::getMaxCoords
+Mesh2::scaleNormals
+Mesh2::getNormal
+
+---
+
+Bei den meisten Mechs mischen sich runde Formen mit eckigen.
+Dies wirkt sich auf die Normalen aus: manche Polygone haben
+eine gemeinsame Normale, bei anderen Dreiecken hat jeder
+Vertex eine eigene Normale. Wenn nichts anderes bekannt ist,
+wird daher der Ansatz gewählt, jedem Polygon eine gemeinsame
+Normale zuzuordnen. Dies geht in OpenGL leider nur, indem
+jeder Punkt für jedes Polygon einzeln gespeichert wird.
+
+Dieser Weg ist bei MW2's WTB's unausweichlich. Beim Laden von
+OBJ's hingegen muss ein neuer Punkt nur dann separat gespeichert
+werden, wenn Normalen oder Texturkoordinaten abweichen. 
+Allerdings ist es auch in diesem Fall einfacher, auf diesen Test zu
+verzichten, und auch hier jeden Polygon-Vertex separat zu speichern.
+
+---
+
+Noch zu erledigen:
+- Polygone mit 5 oder mehr Ecken speichern und rendern
+- Optionale Datenstruktur für Ecken wäre wichtig für Schattenberechnung.
+  Unklar hierbei noch: wie fügt sich das in die API?

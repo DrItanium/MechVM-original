@@ -1,0 +1,126 @@
+<campaign startRoom="GB_Hall_Alshain"
+      _setvar="Missions=BASS,JESS,CLAI,NEWC,JEEH,TIM_,ANDY,FOST,HOFF,ZACK,SEAN,FRAN,ASAH,PETE,CATH,SACH,BRAN"
+      setvar="Missions=BASS,DAVE,CLAI,NEWC,JEEH,TIM_,ANDY,FOST,HOFF,ZACK,SEAN,FRAN,ASAH,PETE,CATH,SACH,BRAN,GUI1,GUI2,GUI3,GUI4,GUIN"
+      setvar="SuccessRoom=GB_Mission_Success" setvar="FailureRoom=GB_Mission_Failure" 
+      setvar="chassis=0" setvar="config=0"
+      setvar="sm1_chassis=0" setvar="sm1_config=0"
+      setvar="sm2_chassis=0" setvar="sm2_config=0"
+      setstr="mechlist=mw2-Horned Owl,mw2-Mad Dog,mw2-Grizzly,mw2-Executioner,mw2-Kodiak,mw2-Stone Rhino"
+      setstr="SM_mechlist=None,mw2-Horned Owl,mw2-Mad Dog,mw2-Grizzly,mw2-Executioner,mw2-Kodiak,mw2-Stone Rhino"
+      setstr="BWDName=PEREGRIN,MADDOG,GRIZZLY,EXECUTNR,KODIAK,BEHEMOTH"
+      setstr="SM_BWDName=None,PEREGRIN,MADDOG,GRIZZLY,EXECUTNR,KODIAK,BEHEMOTH"
+      setstr="MEKName=PRG,MDG,GRZ,EXE,KDK,BHM"
+      setstr="SM_MEKName=-,PRG,MDG,GRZ,EXE,KDK,BHM"
+	  _setstr="weaponsLockers=GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL_UW,GBL,GBL,GBL"
+	  setstr="weaponsLockers=GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL,GBL"
+	  exec="FetchMEKs(chassis,MEKName,configs)"
+	  exec="FetchMEKs(sm1_chassis,SM_MEKName,sm1_configs)"
+	  exec="FetchMEKs(sm2_chassis,SM_MEKName,sm2_configs)"
+	  exec="FetchMEKComment(config,%configs%,comment)">
+
+<room name="Hall_of_Honor" background="1|1.EFA">
+</room>
+
+<room name="Combat_Variables" background="1|2.EFA">
+</room>
+
+<room name="Cockpit_Controls" background="1|3.EFA">
+</room>
+
+<room name="The_Keshik" background="1|4.EFA">
+</room>
+
+<room name="start" background="1|18.EFA">
+   <reg x1="234" y1="160" x2="400" y2="340" goto="Register_Sibko_ID"/>
+</room>
+
+<room name="GB_Hall_Alshain" background="1|10.EFA">
+   <reg x1="250" y1="280" x2="375" y2="375" goto="GB_Mission_Briefing"/>
+   <reg x1="150" y1="220" x2="260" y2="290" goto="Register_Sibko_ID"/>
+   <reg x1="440" y1="295" x2="490" y2="365" goto="Combat_Simulator"/>
+   <!textBtn x1="0" y1="460" x2="640" y2="480" color="ff ff ff" text="Exit" exec="exit"/>
+</room>
+
+<room name="Register_Sibko_ID" background="1|17.EFA">
+   <textBtn x1="300" y1="455" x2="340" y2="475" color="ff ff ff" text="Accept" goto="GB_Hall_Alshain"/>
+</room>
+
+<room name="GB_Dropship" background="1|11.EFA">
+   <reg x1="262" y1="315" x2="375" y2="250" goto="GB_Mission_Briefing"/>
+   <reg x1="250" y1="70" x2="640" y2="480" goto="Combat_Simulator"/>
+</room>
+
+<room name="GB_Outpost" background="1|12.EFA">
+   <reg x1="190" y1="100" x2="435" y2="310" goto="GB_Mission_Briefing"/>
+   <reg x1="0" y1="210" x2="110" y2="420" goto="Combat_Simulator"/>
+</room>
+
+<room name="GB_Mission_Briefing" background="1|13.EFA">
+   <textBtn x1="10" y1="65" x2="65" y2="120" text="Details" goto="GB_Hall_Alshain"/>
+   <textBtn x1="10" y1="110" x2="65" y2="175" text="Logoff" goto="GB_Hall_Alshain"/>
+   <textBtn x1="570" y1="70" x2="625" y2="175" text="Launch" exec="runSim"/>
+
+   <scrollableText x1="85" y1="25" x2="550" y2="224" bwd="BRF1.BWD"/>
+
+   <textBtn x1="385" y1="265" x2="395" y2="285" text="-" setvar="chassis=%chassis%-1" setvar="config=0" 
+      exec="FetchMEKs(chassis,MEKName,configs)" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="405" y1="265" x2="565" y2="285" select="chassis,%mechlist%"/>
+   <textBtn x1="575" y1="265" x2="585" y2="285" text="+" setvar="chassis=%chassis%+1" setvar="config=0" 
+      exec="FetchMEKs(chassis,MEKName,configs)" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="385" y1="285" x2="395" y2="305" text="-" setvar="config=%config%-1" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="405" y1="285" x2="565" y2="305" select="config,%configs%"/>
+   <textBtn x1="575" y1="285" x2="585" y2="305" text="+" setvar="config=%config%+1" 
+      exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="405" y1="305" x2="565" y2="325" text="%comment% (Mech Lab)" 
+      exec="MechLab(config,configs,chassis,MEKName,mechlist)"/>
+
+   <textBtn x1="385" y1="335" x2="395" y2="355" text="-" setvar="sm1_chassis=%sm1_chassis%-1" 
+      setvar="sm1_config=0" exec="FetchMEKs(sm1_chassis,SM_MEKName,sm1_configs)" 
+	  exec="FetchMEKComment(sm1_config,%sm1_configs%,sm1_comment)"/>
+   <textBtn x1="405" y1="335" x2="565" y2="355" select="sm1_chassis,%SM_mechlist%"/>
+   <textBtn x1="575" y1="335" x2="585" y2="355" text="+" setvar="sm1_chassis=%sm1_chassis%+1" 
+      setvar="sm1_config=0" exec="FetchMEKs(sm1_chassis,SM_MEKName,sm1_configs)" 
+	  exec="FetchMEKComment(sm1_config,%sm1_configs%,sm1_comment)"/>
+   <textBtn x1="385" y1="355" x2="395" y2="375" text="-" setvar="sm1_config=%sm1_config%-1" 
+      exec="FetchMEKComment(sm1_config,%sm1_configs%,sm1_comment)"/>
+   <textBtn x1="405" y1="355" x2="565" y2="375" select="sm1_config,%sm1_configs%"/>
+   <textBtn x1="575" y1="355" x2="585" y2="375" text="+" setvar="sm1_config=%sm1_config%+1" 
+      exec="FetchMEKComment(sm1_config,%sm1_configs%,sm1_comment)"/>
+   <textBtn x1="405" y1="375" x2="565" y2="395" text="%sm1_comment% (Mech Lab)" 
+      exec="MechLab(sm1_config,sm1_configs,sm1_chassis,SM_MEKName,SM_mechlist)"/>
+
+   <textBtn x1="385" y1="405" x2="395" y2="425" text="-" setvar="sm2_chassis=%sm2_chassis%-1" 
+      setvar="sm2_config=0" exec="FetchMEKs(sm2_chassis,SM_MEKName,sm2_configs)" 
+	  exec="FetchMEKComment(sm2_config,%sm2_configs%,sm2_comment)"/>
+   <textBtn x1="405" y1="405" x2="565" y2="425" select="sm2_chassis,%SM_mechlist%"/>
+   <textBtn x1="575" y1="405" x2="585" y2="425" text="+" setvar="sm2_chassis=%sm2_chassis%+1" 
+      setvar="sm2_config=0" exec="FetchMEKs(sm2_chassis,SM_MEKName,sm2_configs)" 
+	  exec="FetchMEKComment(sm2_config,%sm2_configs%,sm2_comment)"/>
+   <textBtn x1="385" y1="425" x2="395" y2="445" text="-" setvar="sm2_config=%sm2_config%-1" 
+      exec="FetchMEKComment(sm2_config,%sm2_configs%,sm2_comment)"/>
+   <textBtn x1="405" y1="425" x2="565" y2="445" select="sm2_config,%sm2_configs%"/>
+   <textBtn x1="575" y1="425" x2="585" y2="445" text="+" setvar="sm2_config=%sm2_config%+1" 
+      exec="FetchMEKComment(sm2_config,%sm2_configs%,sm2_comment)"/>
+   <textBtn x1="405" y1="445" x2="565" y2="465" text="%sm2_comment% (Mech Lab)" 
+      exec="MechLab(sm2_config,sm2_configs,sm2_chassis,SM_MEKName,SM_mechlist)"/>
+</room>
+
+<room name="GB_Mission_Success" background="1|20.EFA">
+   <textBtn x1="10" y1="65" x2="65" y2="120" text="Details" goto="GB_Hall_Alshain"/>
+   <textBtn x1="10" y1="110" x2="65" y2="175" text="Logoff" setvar="mission=%mission%+1" goto="GB_Hall_Alshain"/>
+   <scrollableText x1="368" y1="25" x2="576" y2="224" bwd="DBFS.BWD"/>
+</room>
+
+<room name="GB_Mission_Failure" background="1|20.EFA">
+   <textBtn x1="10" y1="65" x2="65" y2="120" text="Details" goto="GB_Hall_Alshain"/>
+   <textBtn x1="10" y1="110" x2="65" y2="175" text="Logoff" goto="GB_Hall_Alshain"/>
+   <scrollableText x1="368" y1="25" x2="576" y2="224" bwd="DBFF.BWD"/>
+</room>
+
+
+<room name="Combat_Simulator" background="1|8.EFA">
+   <textBtn x1="480" y1="20" x2="600" y2="70" color="ff ff ff" text="Exit" goto="GB_Hall_Alshain"/>
+   <textBtn x1="65" y1="125" x2="600" y2="430" color="ff ff ff" text="Please use MechVM's Instant action mode"/>
+</room>
+
+</campaign>

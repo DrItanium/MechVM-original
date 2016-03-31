@@ -1,0 +1,957 @@
+=====
+MW2.prj
+=====
+
+MW2.prj is a binary archive. 
+There is a PROJ signature at offset 0, followed by the file size-7 (dword).
+The names in the main directory are 4 bytes long, and are
+immediately followed by the file offset (dword). These entries
+begin at offset 26 = 1Ah. There may be an additional entry at
+offset 12 = 0ch, but it does not fit into this pattern.
+
+The number of entries in the main directory is stored in a WORD at offset 18h.
+
+The offsets from the main directory point to the string INDX,
+which is part of the structure MW2_PRJ_directory_header in the code.
+After that follow records describing each file, MW2_PRJ_Directory_Entries.
+These records are followed by the symbol table. It stores the file names 
+without extensions, therefore MechVM prefers to read the file names from the
+local file headers. The header of the symbol table is defined in 
+structure SymbolTableHeader. The file names are stored in records of 
+structure SymbolTableEntry.
+
+The offset stored in the MW2_PRJ_Directory_Entries points to the file's local
+header. The local header is described in structure MW2_PRJ_local_file_header.
+The actual file data follows immediately after the file's local header.
+
+Replacing files in the PRJ
+---------------------------
+
+There are two cases:
+
+1. The new file has the same size as the old one or is smaller
+Then the new file can be inserted in the place of the old one,
+any excess space remains unused.
+
+2. The new file is larger than the old one
+Then the new file is appended to the PRJ, and the following 
+must be done:
+2.a The new file needs a header of 62 bytes
+2.b The directory entry must be updated to reflect the new
+size and offset of the new file
+2.c The PRJ file size at offset 4 must be updated
+
+The relative addressing scheme makes it difficult to add new files
+to the end of the archive, unless we overflow the DWORD to a
+negative value.
+
+Alternative:
+Add larger files 
+
+Adding files to the PRJ
+------------------------
+
+The following must be done:
+1. Append the new file(s) with a file header(s)
+2. Write a new subdirectory, containing offsets and file sizes
+3. Update the main directory table to the new subdirectory
+
+Adding a file leaves the old directory structures in place,
+so space in the PRJ is wasted, unless the PRJ is completely
+rebuilt. To lessen this effect, it would be nice to add several
+files at once to the PRJ.
+
+
+===
+SMK
+===
+
+.SMK files are compressed movies/animations. Player:
+http://www.radgametools.com/smkdown.htm
+Open Source Player for smk files:
+http://www.linkmatrix.de/tutorials.php?q=MEDIAPLAYER
+smackw32.dll is needed for playing the files.
+Titan-CDs store these files in Install\Data.
+The files have SMK as a signature.
+
+===========
+SHP-Dateien
+===========
+
+Bei .SHP-Dateien kännen die Zeichen 1.10 als Signatur 
+betrachtet werden. Offset 4 speichert die Anzahl der enthaltenen 
+Bilder. Die Offsets der Bilder stehen als DWORDS ab 8h, im
+Wechsel mit den Offsets fär die Palette, ebenfalls ein DWORD.
+
+Die Paletteninformationen in der SHP-Datei verwenden folgendes
+Format: zunächst steht da die Nummer des Farbeintrags als Byte, 
+gefolgt von den RGB-Werten.
+
+Am Anfang der Bilddaten stehen zwei 16-Bit-Zahlen, die 16 Bytes 
+dahinter vertauscht wiederholt werden. Hier steht die um 1 reduzierte 
+Auflösung des Bildes. Nicht alle Bilder verwenden dieses Format.
+
+Ab 28h stehen Byte-Paare, von denen jeweils das erste eine
+Farbe angibt, und das zweite besagt, wie oft der Wert wiederholt
+werden soll.
+
+Fär die Dekompression der Bilddaten mässen die Steuerbytes wie folgt interpretiert werden:
+
+0: Ende der Zeile, nur ein Byte
+1: überspringe n Bytes in der Ausgabe, n steht im folgenden Byte, 2 Byte
+gerade Zahl: schreibe das folgende Byte n mal, n = Steuerbyte / 2, 2 Byte
+ungerade Zahl: kopiere die folgenden n Bytes in die Ausgabe, n = Steuerbyte / 2, n+1 Byte
+
+(Dank an Demolishon, http://members.tripod.com/demolishun/program/merc_rpg.html)
+
+Wichtige Datei:
+GBL-CD, SMK/WGBMP4AR.SHP: Mech-Übersicht Sektionen
+
+=======
+BWD Files
+=======
+
+English translation: http://www.mektek.net/forums/index.php?showtopic=109442
+
+Die BWD-Dateien beginnen mit der Signatur BWD, null-terminiert, gefolgt
+von einem Wort, das die Dateigröße angibt. Auch die darauf folgenden
+28 Byte unterschieden sich nicht zwischen den betrachteten Dateien.
+
+Die BWD-Dateien bestehen aus Abschnitten. Jeder Abschnitt wird durch ein
+Schlüsselwort eingeleitet, das höchstens vier Byte lang ist. Kürzere Schlüsselworte 
+werden durch 0-Bytes aufgefüllt. Die Länge des Abschnitts ist direkt hinter dem 
+Schlüsselwort vermerkt (als DWORD?). Der erste Abschnitt liegt bei 34h.
+
+Schlüsselwort	Feldlänge	Bedeutung
+ANIM		20		Verweis auf eine 3DI-Datei im mw2.prj-Ordner ANIM
+ASND		24		Verweis auf Standard-Laufgeräusch?
+BTHG		12		wiederholt WORD bei Offset 8 eines vorangegangen OBJ-Abschnitts; lfd. Nummer?
+BLK			32		Leitet Block ein, der durch END beendet wird
+BMPJ			20		1 Word + 1 Verweis auf eine Datei im Verzeichnis CEL
+CPTF			20		WORD=1 und Verweis mw2mech
+ENDB		8		Ende eines durch BLK eingeleiteten Blocks
+ENDR		8		Ende eines Blocks, nähere Bedeutung unklar, Anfang: REPR
+GP			12		Zwei Words?
+HUDF		20		1 Word + 1 Dateiverweis auf mw2hud
+INCL			20		Ein Master-BWD inkludiert andere
+MOFF		8		Ende eines Blocks, PLUMXTRA enthält diesen Abschnitt, also keine Mech-Def.?
+MON			8		Anfang einer Mech-Definition
+MTBL			var.		
+MUSI		24		Angabe eines Musikstäcks von der CD
+NAVP 		80		Definiert einen Navigationspunkt
+OBJ			60		26 Words, die mglw. eine Matrix enthalten
+					Vorletztes Word referenziert einen Mesh im WTB-Ordner nach Nummer
+					Tim Smith: die Words 15, 17, 19 geben die x-, y- und z-Koordinaten an,
+					das zweite word gibt die Nummer des Objekt, zu dem dieses Objekt relativ platziert wird
+OBJL			12		Zwei Words?
+PITF			20		1 Word + Mechname
+MGDF		20		1 Word + Mechname
+POFO		12		Zwei Words?
+REPR			8		Anfang eines Blocks, nähere Bedeutung unklar, Ende: ENDR
+STAR		56
+THNG		12		Speichert ein DWORD; bei Mechs zwei Abschnitte dieses Typs
+TSK			24            Vier ASCII-Zahlen, die erste durch Semikolon, die anderen durch Kommata abgetrennt
+VPTF			20		WORD=1 und Verweis mw2mech
+XPLO			16		Explosion? 4 Words?
+BTHG		12		1 DWORD?
+BMPJ			20		1 Word: Dateinummer im Verzeichnis CEL, dann
+					namentlicher Verweis auf eine Datei im Verzeichnis CEL, ohne Erweiterung .XEL?
+BMID		12		2 Words, das zweite meist $ffFF
+ORDR		Var. 		Text Briefing/Debriefing
+FTBL			84		Formationstabelle?
+NAVP		84		Navigationspunkt
+GPS			100		Beschreibung gegnerischer Mech: Mech-Konfiguration, Name des Piloten
+PALG			48		Verweis auf den Palettenname; gebildet aus Dateiname und mehrfach wiederholten Buchstaben?
+VIEW                 16		Distanz zur Near und Far Clipping Plane, MW2:Titanium
+
+Die Abschnitte vom Typ REPR, ENDR, BLK, ENDB, MON, MOFF bilden Paare, die einen Großteil der
+Datei umschließen können.
+
+Aus den Mercnet 1.1 Problem Reports:
+
+Objects in the game are referenced by their position in the prj file. By this I
+mean that if you're placing an object, you look at a location in the prj 
+file and extract the object data from there. Now, if you add stuff or generally 
+_change_ the prj file, but leave the bwd the same, then chances are that the 
+object is no longer at that location.
+
+Kanajana's MW2 FAQ enthält die Referenz, welches BWD welche
+Mission startet (http://www.geocities.com/k_lupinsky/index.htm).
+
+Das OBJ-Tag bietet genug Platz fär eine 4x4-Matrix aus 16-Bit signed integers.
+Dann wäre noch die Matrix zu finden. Der Code zur Erzeugung von XML-Dateien 
+aus BWD's speichert derzeit nur die Werte, die von den äblichen Werten abweichen.
+Das erste Tag (#0) speichert die laufende Nummer innerhalb des umgebenden
+Representation-Tags. Tag #24 speichert die Nummer des referenzierten Meshes
+im mw2.prj Ordner WTB. Insbesondere die Felder 15 bis 19 weichen häufig ab.
+
+=========
+Database.mw2
+=========
+
+Database.MW2 is a simple, non-hierarchical file archive format. 
+The first DWORD stores the number of files in the archive, the 
+following DWORDS store the file offsets. The size for each file 
+can be deduced from the difference between one file's offset 
+and the next file's offset, or the distance from the start offset 
+to the archive's end-of-file, for the last file in the archive.
+
+Database.mw2 files do not contain file names, so the contents
+of unknown files can only be guessed. There are a number of 
+interesting files in this archive, for example, sound files containing 
+the names of all mechs. The following file formats have been found:
+SHP, DLL, FNT, EFA, FORM, WAV. The DLL is Vesa480.dll.
+
+MW2-31stCC:
+10.EFA: Wolf Clan Hall
+11.EFA: Wolf Clan Holo Projector
+12.EFA: Wolf Cadet Training
+13.EFA: Wolf Clan Ready Room
+14.EFA: Wolf Clan Mech Lab
+15.EFA: Wolf Clan Mission Screen
+16.EFA: Wolf Clan Registry
+17.EFA: Jade Falcon Hall
+18.EFA: Jade Falcon Holo Projector
+19.EFA: Jade Falcon Cadet Training
+20.EFA: Jade Falcon Ready Room
+21.EFA: Jade Falcon Mech Lab
+22.EFA: Jade Falcon Mission Screen
+23.EFA: Jade Falcon Registry
+
+MW2-GBL:
+10.EFA: Clan Ghost Bear Clan Hall
+11.EFA: Dropship Cockpit
+12.EFA: Mannedorf Ready Room
+13.EFA: Clan Ghost Bear Mission Briefing
+14.EFA: Wolf Cadet Training (Binary identical to 31st's 12.EFA)
+15.EFA: Black Screen?
+16.EFA: Wolf Clan Mission Briefing (Binary identical to 31st's 15.EFA)
+17.EFA: Clan Ghost Bear Registry
+18.EFA: Clan Ghost Bear Logo
+19.EFA: Clan Ghost Bear Mission Debriefing
+20.EFA: Clan Ghost Bear Mission Debriefing 2
+21.EFA: Details
+22.EFA: Blood Names
+23.EFA-25.EFA: Easter Eggs
+
+MW2-Mercs:
+12.EFA: Dropship Repair&Reload
+13.EFA: Mech Hangar
+14.EFA: Commander's Chair
+15.EFA: Mercenary Hall
+16.EFA: Mech Hangar
+18.EFA: Arms Merchant
+19.EFA: Load&Save
+20.EFA: Instant Action
+21.EFA: Instant Action 2
+22.EFA: Mech Lab
+23.EFA: Callsign Prompt
+24.EFA: Customization
+25.EFA: Mercenary Hall of Frame
+26.EFA: Combat Options
+27.EFA: Cockpit Controls
+28.EFA: The First Circuit
+
+Replacing files in Database.MW2 is easy; just append the new file,
+and adjust the file pointer in table at the start of file accordingly.
+In many cases, 2-byte sequences xx 00 are replaced by 3-byte 
+sequences aa bb aa.
+
+==========
+FORM Files
+==========
+
+Die database.mw2-Archive von 31CC und GBL enthalten Dateien dieses Typs.
+Am Anfang der Datei stehen häufig ähnliche Worte (FORM, IRINFO, 
+CAT, XMID, TIMB, manchmal EVNT). Bytes 5 bis 14h kännen als 
+Signatur gelten. Dahinter folgen binäre Daten.
+
+Die zwei Bytes 00 EFh ab Offset 3 stimmen mit EFA Files überein.
+Möglicherweise sind FORM Files und EFA Files derselbe Dateityp.
+Bei Offset 5 stände der Verweis auf den Anfang der Bilder. Ein Byte
+dahinter steht ein Word (639), mit einem weiteren Byte Abstand folgt
+ein Word (479), ideal als Bildauflösung.
+
+======
+EFA Files
+======
+
+The shell screens are stored in database.mw2 as PCX files with
+an additional Lempel-Ziv compression. The added compresseion layer 
+uses control bytes, code words and data bytes. Control
+bytes consist of two opcodes, each of which is stored in a nibble.
+The following control nibbles have been identified:
+
+0h: Decode 8 bytes (totally read: 8)
+1h: Copy one, decode six (totally read: 7)
+2h: Decode two, copy one, decode 4 (totally read: 7)
+3h: Copy two, decode four (totally read: 6)
+4h: Decode four bytes, copy one, decode two
+5h: Copy one, decode two, copy one, decode two (totally read: 6)
+6h: Decode two, copy two, decode two (totally read: 6)
+7h: Copy three bytes, decode two (totally read: 5)
+8h: Decode six, copy one (totally read: 7)
+9h: Copy one, decode four, copy one (totally read: 6)
+Ah: Decode two, copy one, decode two, copy one (totally read: 6)
+Bh: Copy two bytes, decode two, copy one (totally read: 5)
+Ch: Decode four bytes, copy two (totally read: 6)
+Dh: Copy one byte, decode two, then copy two (totally read: 5)
+Eh: Decode two bytes, then copy three (totally read: 5)
+Fh: Copy four bytes (totally read: 4)
+
+Code words consists of 12 bits that define a distance for copying
+and 4 bits that describe the number of bytes to copy. The distance
+is relative to either the current or the last 4096, but always 
+before the current position in the output stream. The length is
+stored minus 3.
+
+Data bytes are simply copied to output. Decoding MW2's Lempel-Ziv 
+compression starts by analyzing the control byte at offset 4 (always EFh). 
+Fully decoding a MW2 shell screen produces a PCX file. The PCX signature 
+from offsets 3 to 12h can be used as a signature:
+
+00 EF 0A 05 01 08 FC 1F 7F 02 DF FF 01 48 00 48
+
+The DWORD at offset 0 contains the size of the produced file.
+For lack of another naming source, I derived the file type name EFA 
+from the signature.
+
+Replacing EFA files in 31st's Database.MW2 with EFA from other 
+versions demonstrates that all EFA's can be displayed with MW2:31stCC's
+algorithm. This proves that all EFA's use an identical compression
+algorithm and control bytes. However, replacing an EFA with a PCX does 
+not work, so MW2 relies on "knowing" the file types, even if it is wrong.
+
+The first DWORD in an EFA file gives the decoded file size.
+
+==============================
+.MEK: User-defined mechs
+==============================
+
+General Information:
+00h - DWORD - Tonnage
+04h - DWORD - Engine type
+08h - DWORD - JumpJet Count
+0Ch - DWORD - Heatsink Count
+10h - DWORD - Number of Weapons
+14h - DWORD - Ammo Count
+
+After general information, the mech sections are described. 
+Each section has the following layout:
+00h - DWORD - Front Armor
+04h - DWORD - Rear Armor
+08h - DWORD - Internal Structure
+0Ch - WORD Array - Criticals
+
+The sections are stored at these offset:
+018h - Head, 6 criticals
+040h - Right Torso, 12 criticals
+068h - Center Torso, 12 criticals
+090h - Left Torso, 12 criticals
+0B8h - Right Arm, 12 criticals
+0E0h - Left Arm, 12 criticals
+108h - Left Leg, 6 criticals
+130h - Right Leg, 6 criticals
+
+(Possible that left/right legs/arms are interchanged?)
+
+If the same weapon is present several times, each
+recurrence has a +1 incremented code.
+After the section table follows the weapons group table.
+It consists of 8-byte-records. Their number is stored in offset 10h,
+with the following layout:
+0h - WORD - Weapon ID
+2h - WORD - Weapon Group Number
+4h - DWORD - FFFF = -1
+
+[Ammo section]
+8 bytes for each weapon with ammo.
+
+The MEK file is concluded by 50 characters that comment the file.
+
+The codes in MW2:31st Century Combat are different
+from those in MW2:Mercs and the Titanium Editions.
+If there are more heat sinks than round down 
+(engine rating/25), but no heat sinks in the critical 
+hits table, then the heat sinks are double heat sinks.
+All ammo for a weapon has the numeric code
+of the weapon plus 10000.
+The following 6 bytes can be used as a signature:
+0C 17 44 16 76 16, starting at offset 24h.
+MW2.prj contains MEK files in the MEK folder.
+
+MW2 Weapon IDs for 31stcc, GBL (DOS, Win95):
+   0 LRM 20
+ 100 LRM 15
+ 200 LRM 10
+ 300 LRM 5
+ 400 SRM 6
+ 500 SRM 4
+ 600 SRM 2
+ 700 Streak SRM 6
+ 800 Streak SRM 4
+ 900 Streak SRM 2
+
+1000 MG
+1100 Gauss Rifle
+1200 LB-X Autocannon/2
+1300 LB-X Autocannon/5
+1400 LB-X Autocannon/10
+1500 LB-X Autocannon/20
+1600 Ultra Autocannon/2
+1700 Ultra Autocannon/5
+1800 Ultra Autocannon/10
+1900 Ultra Autocannon/20
+
+2000 Flamer
+2100 ER PPC
+2200 ER Large Laser
+2300 ER Medium Laser
+2400 ER Small Laser
+2500 Large Pulse Laser
+2600 Medium Pulse Laser
+2700 Small Pulse Laser
+2800 NARC
+2900 Anti-Missile System
+
+3000 Nuke
+3200 SRT 4
+3400 Arrow IV
+3500 LRM 20
+3600 LRM 15
+3700 LRM 10
+3800 LRM 5
+3900 SRM 6
+
+4000 SRM 4
+4100 SRM 2
+4200 Streak SRM 2
+4300 Machine Gun
+4400 Gauss
+4500 Autocannon/2
+4600 Autocannon/5
+4700 Autocannon/10
+4700 Ultra Autocannon/10
+4800 Autocannon/20
+4800 Ultra Autocannon/20
+4900 Ultra Autocannon/5
+4500 Ultra Autocannon/2
+
+5000 LB-X Autocannon/10
+5100 Flamer
+5200 ER PPC
+5300 PPC
+5400 ER Large Laser
+5500 Large Laser
+5600 Medium Laser
+5700 Small Laser
+5800 Large Pulse Laser
+5900 Medium Pulse Laser
+
+6000 Small Pulse Laser
+6100 NARC
+6200 Anti-Missile System
+
+7000 MASC
+7300 Shoulder
+7350 Upper Arm Actuator
+7400 Lower Arm Actuator
+7450 Hand
+7500 Hip
+7550 Upper Leg Actuator
+7600 Lower Leg Actuator
+7650 Foot
+7700 Sensors
+7750 Cockpit
+7850 Engine
+7800 Gyro
+7900 Life Support
+
+8000 Heat Sink
+8500 Jump Jet
+
+9000 Endo Steel Internals
+9500 Ferro-Fibrous Armor
+9550 CASE
+
+10000+X Ammo (X)
+
+
+MW2 Weapon IDs in MEK files since Mercs:
+   0 LRM 20 (Clan)
+ 100 LRM 15 (Clan)
+ 200 LRM 10 (Clan)
+ 300 LRM 5 (Clan)
+ 400 SRM 6 (Clan)
+ 500 SRM 4 (Clan)
+ 600 SRM 2 (Clan)
+ 700 Streak SRM 6 (Clan)
+ 800 Streak SRM 4 (Clan)
+ 900 Streak SRM 2 (Clan)
+
+1000 MG (Clan)
+1100 Gauss Rifle (Clan)
+1200 LB-X Autocannon/2 (Clan)
+1300 LB-X Autocannon/5 (Clan)
+1400 LB-X Autocannon/10 (Clan)
+1500 LB-X Autocannon/20 (Clan)
+1600 Ultra Autocannon/2 (Clan)
+1700 Ultra Autocannon/5 (Clan)
+1800 Ultra Autocannon/10 (Clan)
+1900 Ultra Autocannon/20 (Clan)
+
+2000 Flamer (Clan)
+2100 ER PPC (Clan)
+2200 ER Large Laser (Clan)
+2300 ER Medium Laser (Clan)
+2400 ER Small Laser (Clan)
+2500 Large Pulse Laser (Clan)
+2600 Medium Pulse Laser (Clan)
+2700 Small Pulse Laser (Clan)
+2800 NARC (Clan)
+2900 Anti-Missile System (Clan)
+
+3000 Nuke (Clan)
+3200 SRT 4 (Clan)
+3400 Arrow IV (Clan)
+3500 LRM 20
+3600 LRM 15
+3700 LRM 10
+3800 LRM 5
+3900 SRM 6
+4000 SRM 4
+4100 SRM 2
+4200 Streak SRM 2
+
+4300 Machine Gun
+4400 Gauss
+4500 Autocannon/2
+4600 Autocannon/5
+4700 Autocannon/10
+4800 Autocannon/20
+4900 Ultra Autocannon/5
+5000 LB-X Autocannon/10
+
+5100 Flamer
+5200 ER PPC
+5300 PPC
+5400 ER Large Laser
+5500 Large Laser
+5600 Medium Laser
+5700 Small Laser
+5800 Large Pulse Laser
+5900 Medium Pulse Laser
+
+6000 Small Pulse Laser
+6100 NARC
+6200 Anti-Missile System
+
+7000 MASC (Clan)
+7300 Shoulder
+7350 Upper Arm Actuator
+7400 Lower Arm Actuator
+7450 Hand
+7500 Hip
+7550 Upper Leg Actuator
+7600 Lower Leg Actuator
+7650 Foot
+7700 Sensors
+7750 Cockpit
+7800 Gyro
+7850 Engine
+7900 Life Support
+
+8000 Heat Sink
+8500 Jump Jet
+
+9000 Endo Steel Internals
+9500 Ferro-Fibrous Armor
+9550 CASE
+
+10000+X Ammo (X)
+
+=============
+Waffentabelle
+=============
+
+Die Waffentabelle findet sich verstreut in MW2Shell.dll.
+Der Aufbau ist im WinHex-template mw2weapons.txt
+und mw2weapons-titan.txt dokumentiert. Negative Werte 
+beim Schaden gelten pro Rakete.
+
+MW-Version		Waffen-Records	Waffen-Namen	#Waffen	Reaktoren	Reaktornamen	Dateigröße
+MW2-Refusal-DOS	8B9F0h		833FBh		30		8B630h	83274h		603471 Bytes
+MW2-Refusal-Matrox	65900h 		69AACh 		30		65540h	698C8h		549888 Bytes
+MW2-GBL-DOS-ger	902A0h		879A1h		35		8FEE0h	8781Ah		624571 Bytes
+
+Die Varianten ab Mercs verwenden ein 64-Bit-Speicherformat:
+MW-Version		Waffen-Records	Waffen-Namen	#Waffen	Reaktoren	Reaktornamen	Dateigrääe
+MW2-Mercs-DOS-ger	94FB0h		9C36Ch		65		94AB0h	9C188h		832512 Bytes
+MW2-Refusal-Titan16	5CC10h		61a4Ch		65		5C710h	61868h		508416 Bytes
+MW2-GBL-titan		631A8h		6835Ch		65		62CA8h	68178h		534016 Bytes
+MW2-Mercs-Titan	AA288h		b1714h		65		A9D88h	B1530h		881152 Bytes
+
+Vor den Waffennamen stehen weitere Infos zu Reaktornamen und Criticals
+fär Arme, Beine etc.
+
+Die Werte für interne Struktur stehen in den .mek-Dateien. 
+Es wird keine Tabelle für interne Struktur in MechWarrior II 
+benötigt, da nur Mechs zu vorhandenen Chassis verändert 
+werden können, und Tonnage der Chassis nicht verändert 
+werden kann.
+
+=========
+XEL: Texturen
+=========
+
+Die XEL-Dateien sind unkomprimierte Texturen. Die Zeilenzahl 
+steht als Word in Offset 0, dahinter folgt die Spaltenzahl, ebenfalls
+als Word. Direkt dahinter stehen die Daten als 8-Bit-Indizes in
+eine unbekannte Palette. Die XEL-Dateien können angezeigt werden,
+wenn zuvor die korrekte Palette augewählt wurde.
+
+======
+TEX File
+======
+
+This file type has signature 1.22 at offset 0 and is an uncompressed image.
+Offset 6 and 8 store the horizontal and vertical image size in words.
+Offset Ah stores the number of color entries. These follow at offset Ch as 
+tuples of four bytes. Decoding as BGRA with 8 Bit shows the logos in correct 
+colors, but many other textures still look implausible. After the table, the 
+texels follow as indices into the color table.
+
+For offset 4, the values 0, 3, and 7 have been observed. It may be a bit
+mask, but so far its values escape explanation. While many images show
+wrong colors, others are flipped horizontally, for example, the Draconis
+Combine insignias, though that may be true for the Draconis Combine XEL 
+files, too. The formula for the file size appears to be unaffected.
+
+=======
+FNT: Fonts
+=======
+
+Die Dateien scheinen SHP-Dateien strukturell ähnlich.
+Die Signatur ist 31 2E 00 00h. Als Pixel scheinen überwiegend
+die Werte 00 und FFh zur Anwendung zu kommen.
+
+===================
+WTB: Meshes
+===================
+
+The PRJ file contains many WTB files in the POLY subdirectory.
+They have a WTBO signature at offset 0 and store meshes.
+
+The WTB's consist of two blocks. The first block defines points,
+the second block defines polygons by indices into the first block.
+The number of points in the first block is stored in a word at 
+offset 18h and it starts at offset 20h. It contains records composed 
+of 3 signed 32-bit values and two WORDs, 16 bytes total. The first 
+three values define a coordinate in R^3, the following two words
+define uv texture coordinates.
+
+At offset 1ah we find the number of records in the second block,
+which immediately follows the first block. At the start of each polygon
+there is a word marker whose purpose I have not understood. It is 
+followed by another WORD defining the number of polygon vertices. 
+After that, the polygon vertices are defined as WORD indices into the first
+block. For polygons with 3 or 4 vertices, the records are padded with
+zero bytes to 12 bytes, otherwise to 18 bytes.
+
+Mech limbs are stored in separate files for torso (head), left arm (larm),
+right arm (rarm), left/right upper/lower leg (luleg, ruleg, llleg, rlleg).
+Feet are stored in  (lfoot, rfoot), or separated into front/rear toe and ankle
+(lftoe, rftoe, lrtoe, rrtoe, lankl, rankl).
+
+The 3D enhanced versions store additional data compared to the DOS versions, 
+but they share the rest. In both cases, vertices are defined by 3 DWords, and 
+there are records for accessing polygons of up to four vertices and another 
+for larger ones. Both formats have a 32-byte header, followed by the points. 
+The records for the vertices are 40 bytes long for the 3D enh. versions, and 
+only 16 bytes for the DOS versions.
+
+The polygons reference the vertices by WORD numbers. The number of polygons is 
+in the first WORD, then follow the indices into the point array defined before, 
+also WORDs. The polygons are stored in records. In DOS, these records are 12 or 
+18 bytes long, for the 3D enh. versions, they are 40 or 46 bytes long. The 
+actual polygon data in the polygon records starts at offset 2 (DOS) or 
+30 (3D enh.) versions. 
+
+I don't know how the 3D enhanced versions versions render. If they render in 
+16-bit color, it would be worthwhile to store polygon normals for lighting. 
+They also probably reference a CEL texture by number and store some kind of 
+texture coordinates.
+
+=======
+SFL: Sound
+=======
+
+Signatur: SFLX
+Die Dateien liegen als PCM unkomprimiert, 11025 Samples/sek., vor.
+Die Dateien haben eine Block-Struktur mit vorangestelltem Typbyte.
+05h bedeutet dann einen unverschlüsselten Block, mit einer Länge von 
+128 Byte Daten. 04 hat eine Blocklänge von 80 Byte. Wenn hier dieselbe
+Anzahl Samples enthalten wäre, blieben pro Sample exakt 5 Bits. Das deutet
+wiederum darauf, dass entweder die 5 Bits Differenzen von -16  bis +15
+darstellen, oder Werte von 112 bis 144, also leise Passagen.
+Blocktyp 3 hat eine Länge von 37 Bytes. Er wird von 4 Bytes zwischen
+36=54 und 47h=71 gefolgt. Blocktyp 2 hat eine Länge von 19 Bytes und
+wird durch 2 Bytes zwischen 36=54 und 47h=71 eingeleitet.
+
+Bei Blocktyp 4 folgen auf das 04-Byte 16 Byte, die Werte zwischen 20h und 58h 
+enthalten. Der Rest des Blocks besteht aus 64 Byte. Mäglicherweise wird jedes
+Nibble zu einem Byte entpackt. Ob dabei die vorangegangenen 16 Byte 
+eine Rolle spielen, ist unklar. Dieser Blocktyp findet besonders bei Stimmen
+Verwendung, es handelt sich also vermutlich um einen Voice Codec aus den
+90'er Jahren.
+
+Einzelne Sounds aus MW2-31st-DOS-ger:
+MecTurX2.sfl: Reaktor fährt hoch
+MecSLasr.sfl: Small Laser gefeuert
+MecMLasr.sfl: Laser gefeuert
+MecACan1.sfl: Autokanone
+MecBBaat.sfl: Raketen gefeuert
+MecBsyRX.sfl: Soundsignal Mech gestartet
+MecFSMed.sfl: Fusstritt
+MecGauNR.sfl: Gauss-Kanone gefeuert
+MexMisNR.sfl: PPC gefeuert
+MecPLasr.sfl: Medium Pulse Laser gefeuert
+PulseBig.sfl: Large Pulse Laser gefeuert
+PulseSml.sfl: Small Pulse Laser gefeuert
+MecPPCXX.sfl: PPC-Einschlag
+MecRDWA1.sfl: Kritischer Treffer
+MecShtd1.sfl: Reaktor fährt herunter
+
+Nicht abspielbare Sounds in MW2:31st:
+Tan_00BS.sfl
+
+===
+3DI
+===
+
+Diese Dateien speichern vermutlich die Animationen, die für die Mechs
+beim Gehen verwendet werden. Bei den Offsets 0, 4, ch stehen Zahlen
+ungleich 0, alle anderen der ersten 16 Bytes sind 0. Offset 4 enthält
+die Zahl von 8-Byte Records am Ende der Datei.
+
+Die 3DI-Dateien werden von -BWD-Dateien äber das ANIM-Tag verlinkt.
+
+=====
+Musik
+=====
+
+Die Tracks 5, 11, 12, 13, 15 sind in der Titan-Version von GBL neu gegenäber der DOS-Version.
+GBL-DOS Track 13, 14, 15, 16, 17, 18, 19, 20 wiederholen Tracks 2, 12, 7, 3, 5, 8, 9, 4 von MW2:Refusal War-DOS.
+Track 
+
+GBL-DOS MW2-RW
+11 10
+12 6
+13 2
+14 12
+15 7
+16 3
+17 5
+18 8
+19 9
+20 4
+
+Es fehlt Track 20 der MW2-DOS MP3's!
+
+Bei Mercs scheint die Version mit DOS-Markierung identisch mit der Version ohne
+diese Markierung. Möglicherweise wurde letztere von einer DOS-CD kopiert, dann
+müsste der Vergleich mit Titan nochmals durchgeführt werden. Diesem Grab fehlt
+Track 14, und ab Track 20 sind die Tracks um eins verschoben.
+
+=======
+Notizen
+=======
+
+Entscheidend für wiedererkennbare Levels sind die Höhendaten.
+Diese wurden aber bisher nicht gefunden. Die Auflösung des 
+Höhenfeldes könnte durch Subdivision Surfaces oder prozedural 
+verbessert werden.
+
+Bei der Mission "Unterwasserangriff" muss man sehr vorsichtig mit
+den Torpedos umgehen. Am besten viel Abstand sowohl von den eigenen
+als auch den feindlichen Torpedos halten. Evtl. mit Taste K die
+Munition abwerfen. Dabei müssen die Torpedos als Waffe ausgewählt sein.
+
+Bei GBL hilft es allgemein, vor der Zerstörung des eigenen Mechs mittels
+Strg+Alt+E auszusteigen, damit der "Todeszähler" nicht steigt und man am
+Schluss noch Khan werden kann.
+
+Heavy Gear I, Battlezone und Interstate '76 benutzen dieselbe
+Engine wie MW2, Heavy Gear II und Interstate '82
+hingegen eine andere. 
+
+==========
+Playstation MW2
+==========
+
+Die Playstation CD enthält keine MW2.PRJ's, sondern nur als Buchstaben
+kodierte Dateien. Im Hauptverzeichnis sind einige Lieder im WAV-Format,
+die unter der Erweiterung .CDR gespeichert sind. Die Lieder sind alle im
+MW2:Mercs Soundtrack enthalten. Lied 10d ist nicht sehr lang, sondern es
+wurde nur zweimal derselbe Song aneinander gehängt.
+
+====
+Ideen
+====
+
+- schlanke Engine
+- integrierter FTP-Client für Downloads von Kampagnen, Mechs und Karten und Plugins
+- Plugins:
+   - Editoren für Kampagnen, Mechs und Karten als separate Downloads
+   - 7-Zip Plugin zur Kompression der Spieldateien
+   - DevIL für Bildkompression
+   - Smacker-Plugin, um Filme abzuspielen
+- Laser-Schaden, PPC fällt linear mit der Entfernung
+- Autokanone, Gauss-Geschoss hat eigentlich nichtlinearen Geschwindigkeitsabfall
+- Autokanone, Gauss, Laser, PPC: nichtlineare Schadensverringerung durch Atmosphäre
+- Raketen: immer gleicher Schaden für Raketen-Volltreffer, sonst abh- von Entfernung der 
+   Detonation
+- Mech-Geschwindigkeit aus tatsächlichem, nicht max. theoretischen Gewicht berechnen
+- Interne Struktur: Stärke soll von getragenem Gewicht abhängen, automatisch berechnet
+- Daher auch: Panzerung frei wählbar, nicht durch interne Struktur beschränkt
+- Panzerung und interne Struktur: nur Gewicht angegeben, nicht Punktezahl
+- Wenn in einer Sektion Ferro-Fibrit verwendet wird, erhäht sich der Panzerwert nur 
+  in dieser Sektion
+- Panzerungstypen können beliebig gemischt werden, es kännen also bis zu
+  14 Volumeneinheiten als Ferro-Fibrit zugeordnet werden
+- Endostahl kann auch pro Sektion zugeordnet werden
+- Auch Volumeneinheiten konsequent als kontinuierliche Größen behandeln
+- Begriff interne struktur durch Skelett ersetzen?
+- Flugzeuge kännen in der Atmosphäre Turbinen benutzen, ausserhalb der Atmosphäre
+  funktionieren nur Räckstoäantriebe, z.B. chemische, mit Tank
+  
+
+====================
+MW2 Drawing Distance Variable
+====================
+
+According to the documentation on how to build user worlds for MW2, the 
+drawing distance variable resides in the VIEW tag of BWD files. Replace
+the hex values
+
+5649455710000000400000003f3f3f3f
+  
+with
+
+5649455710000000400000003ffFFffFF
+
+to set the viewing distance to 8km.
+
+Better solution: check which files store the VIEW tag and make local
+changes to these files to be able to set a mission-specific viewing distance.
+Apparently, the *scn.bwd files are the main mission descriptions from which
+all other mission files are referenced. Therefore, by appending a VIEW tag
+to the end of those files, we could force mission-specific viewing 
+distances. Because the files would grow in this process, we would need to
+recreate the BWD files.
+
+Unpack MW2.PRJ using MechVM, then search for the VIEW tag using
+WinHex logical search to uncover the VIEW tag positions.
+
+A search on the extracted files yielded *PLT1.BWD files. Perhaps it
+is possible to set mission-specific far clipping planes by manipulating
+these files. That would be much faster, elegant and users wouldn't have
+to meddle with the files every time they advance to the next mission.
+=> More tests needed, does not appear to work with GBL DOS.
+
+Another idea, let the user type the short mission name, yell for example,
+then search all BWD files that start with that string for te VIEW variable.
+
+============
+DOS sim resolution
+============
+
+The resolution is controlled by the file MW2SND.CFG for the DOS versions.
+It contains the file name of the DLL to choose the correct resolution:
+
+MCGA.DLL for 320x200
+VESA480.DLL for 640x480
+VESA768.DLL for 1024x768
+
+If we decompiled the DLLs, we could create a new DLL that would allow for other resolutions.
+
+======================
+Titanium GBL Overweight bug
+======================
+
+3 possible solutions:
+- Disassemble gblwin.exe/mw2shell.dll to find the bug
+- Replace file in place, works only for configs smaller than the orig. one
+- Replace file by appending the new file and linking to it
+  => may lead to problems with local file headers
+- Add new config to the PRJ
+  => requires writing a new directory table or rebuilding the PRJ
+
+Tested solutions that don't work:
+- Set byte 0 in MEK file to 0 or 1. That byte stores the mech tonnage
+
+Or make the new file the last file, because there can't be a next file ...
+this does not work in cases where files are referenced by their entry
+number, but it should work for the MEK files.
+
+=====================
+Titanium resolution changer
+=====================
+
+Titanium: 31stCC, GBL will run in higher resolution after changing 
+the following offsets in MercsW.DLL:
+
+new horizontal resolution: 45CEAh, 46661h, 46765h, 47206h
+new vertical resolution: 45CF4h, 46671h, 4676Fh, 47210h
+
+new vertical resolution minus one: 466EFh
+new horizontal resolution minus one: 466FCh
+
+Do not change the following offsets in MercsW.DLL:
+9E82h, 161AEh, 4B4F1h, 720B2h, A8CADh
+
+Targeting an enemy using the 't' key resets the viewing matrix.
+Unfortunately, this means that TT reverts to rendering in a
+640x480 pixel part of the screen. By pressing F4 twice, this
+problem is avoided. This is the only known issue.
+
+Do not change the following offsets in GBLWin.Exe:
+CFBh, 
+
+8002h = 640
+7F02h = 639
+E001h = 480
+DF01h = 479
+1904h = 1049
+7705h = 1399
+
+Patching all occurences of the possible resolution values does not 
+have the desired effect in the following DLLs:
+GBLwin.exe, Wail32.dll, anet2.dll, dkupddl.dll, 
+
+Possible other reasons of problems:
+Disp\radar.dll in MW2.PRJ: file not used in Titan? Overwritten with 
+zeroes, no difference
+RealMW2Win.exe: editing this can let the shell run in other resolutions,
+but the screen is not fully used
+MW2Shell.dll?
+
+MW2Shell, offsets to leave alone:
+36DDh, 
+MW2Shell.Dll quits any changes to the constant 479 with a crash
+
+----------------------------
+Mercenaries' MercsW.DLL:
+----------------------------
+
+Changes to let MW2:Mercs (Titanium Trilogy) run at higher
+resolutions, patch mercsw.dll at the following offsets. Enter:
+New horizontal resolution: 285674, 285863, 287774, 288034
+New vertical resolution: 268015, 285684, 287790, 288044
+Horizontal Resolution minus one: 287916
+Vertical Resolution minus one: 287929
+
+Reducing these values to zero stops rendering the scene:
+288034h,  288044h
+
+Cannot use the following resolutions: 1024x768, 1280x1024

@@ -1,0 +1,133 @@
+<campaign startRoom="Wolf_Hall"
+      setvar="Missions=YELL,ORAN,TEAL,TAUP,JENN,SABL,GREY,BROW,AMY_,SILV,AQUA,KIM_,CYAN,MARO,GOLD,IREN"
+      setvar="SuccessRoom=WC_Success" setvar="FailureRoom=WC_Fail"
+      setvar="chassis=0" setvar="config=0"
+      setstr="mechlist=mw2-Elemental,mw2-Firemoth,mw2-Tarantula,mw2-Kit Fox,mw2-Jenner IIC,mw2-Nova,mw2-Stormcrow,mw2-Mad Dog,mw2-Hellbringer,mw2-Rifleman IIC,mw2-Summoner,mw2-Timber Wolf,mw2-Gargoyle,mw2-Warhammer IIC,mw2-Warhawk,mw2-Marauder IIC,mw2-Battlemaster IIC,mw2-Dire Wolf"
+      setstr="BWDName=ELEMNTL,FIREMOTH,TARANTUL,KITFOX,JENNER,NOVA,STRMCROW,MADDOG,HELLBRGR,RIFLEMAN,SUMMONER,TIMBRWLF,GARGOYLE,WARHAMMR,WARHAWK,MARAUDER,BTTLMSTR,DIREWOLF"
+      setstr="MEKName=ELE,FRM,TAR,KTF,JNR,NVA,STM,MDG,HLB,RFL,SMN,TBR,GRG,WHM,WHK,MRD,BTM,DRW"
+      setstr="SM_mechlist=None,mw2-Elemental,mw2-Firemoth,mw2-Tarantula,mw2-Kit Fox,mw2-Jenner IIC,mw2-Nova,mw2-Stormcrow,mw2-Mad Dog,mw2-Hellbringer,mw2-Rifleman IIC,mw2-Summoner,mw2-Timber Wolf,mw2-Gargoyle,mw2-Warhammer IIC,mw2-Warhawk,mw2-Marauder IIC,mw2-Battlemaster IIC,mw2-Dire Wolf"
+      setstr="SM_BWDName=None,ELEMNTL,FIREMOTH,TARANTUL,KITFOX,JENNER,NOVA,STRMCROW,MADDOG,HELLBRGR,RIFLEMAN,SUMMONER,TIMBRWLF,GARGOYLE,WARHAMMR,WARHAWK,MARAUDER,BTTLMSTR,DIREWOLF"
+      setstr="SM_MEKName=-,ELE,FRM,TAR,KTF,JNR,NVA,STM,MDG,HLB,RFL,SMN,TBR,GRG,WHM,WHK,MRD,BTM,DRW"
+      setvar="sm1_chassis=0" setvar="sm1_config=0"
+      setvar="sm2_chassis=0" setvar="sm2_config=0">
+
+<room name="Hall_of_Honor" background="1|1.EFA">
+</room>
+
+<room name="Combat_Variables" background="1|2.EFA">
+</room>
+
+<room name="Cockpit_Controls" background="1|3.EFA">
+</room>
+
+<room name="The_Keshik" background="1|4.EFA">
+</room>
+
+<room name="Instant_Action" background="1|8.EFA">
+   <textBtn x1="20" y1="10" x2="600" y2="30" color="ff ff ff" text="Please use MechVM's Instant action mode"/>
+   <textBtn x1="50" y1="455" x2="70" y2="475" color="ff ff ff" text="Exit" goto="Splash_Screen"/>
+</room>
+
+<room name="Wolf_Hall" background="1|10.EFA">
+   <reg x1="0" y1="240" x2="83" y2="403" goto="Wolf_Ready_Room"/>
+   <reg x1="94" y1="379" x2="180" y2="479" goto="Register_Wolf_Sibko_ID"/>
+   <reg x1="185" y1="275" x2="220" y2="390" goto="Wolf_Training"/>
+   <reg x1="160" y1="210" x2="450" y2="360" goto="Wolf_Holo_Projector"/>
+   <!textBtn x1="0" y1="460" x2="640" y2="480" color="ff ff ff" text="Exit" exec="exit"/>
+</room>
+
+<room name="Wolf_Holo_Projector" background="1|11.EFA">
+   <reg x1="70" y1="360" x2="108" y2="403" exec="Holo_Up"/>
+   <reg x1="400" y1="370" x2="470" y2="405" exec="Holo_Prev_Page"/>
+   <reg x1="490" y1="370" x2="570" y2="405" exec="Holo_Next_Page"/>
+   <reg x1="0" y1="420" x2="640" y2="480" goto="Wolf_Hall"/>
+</room>
+
+<room name="Wolf_Training" background="1|12.EFA">
+   <reg x1="0" y1="120" x2="60" y2="480" goto="Wolf_Hall"/>
+</room>
+
+<room name="Wolf_Ready_Room" background="1|13.EFA">
+   <reg x1="130" y1="160" x2="400" y2="330" goto="Wolf_Mission_Briefing"/>
+   <reg x1="275" y1="330" x2="640" y2="480" goto="Wolf_Mech_Lab"/>
+   <reg x1="0" y1="100" x2="120" y2="480" goto="Wolf_Hall"/>
+</room>
+
+<room name="Wolf_Mech_Lab" background="1|14.EFA">
+   <textBtn x1="0" y1="420" x2="430" y2="480" text="Exit" goto="Wolf_Ready_Room"/>
+   <textBtn x1="520" y1="430" x2="60" y2="480" text="Exit" goto="Wolf_Ready_Room"/>
+   <textBtn x1="100" y1="140" x2="110" y2="150" text="-" setvar="chassis=%chassis%-1" setvar="config=0" exec="FetchMEKs(chassis,MEKName,configs)" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="120" y1="140" x2="200" y2="150" text="Chassis:"/>
+   <textBtn x1="210" y1="140" x2="350" y2="150" select="chassis,%mechlist%"/>
+   <textBtn x1="360" y1="140" x2="370" y2="150" text="+" setvar="chassis=%chassis%+1" setvar="config=0" exec="FetchMEKs(chassis,MEKName,configs)" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="100" y1="160" x2="110" y2="170" text="-" setvar="config=%config%-1" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="120" y1="160" x2="200" y2="170" text="Config:"/>
+   <textBtn x1="210" y1="160" x2="350" y2="170" select="config,%configs%"/>
+   <textBtn x1="360" y1="160" x2="370" y2="170" text="+" setvar="config=%config%+1" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="210" y1="180" x2="350" y2="190" text="%comment%"/>
+   <textBtn x1="210" y1="200" x2="350" y2="210" text="Mech Lab" exec="MechLab(config,configs,chassis,MEKName,mechlist)"/>
+
+   <textBtn x1="100" y1="240" x2="110" y2="250" text="-" setvar="sm1_chassis=%sm1_chassis%-1" setvar="sm1_config=0" exec="FetchMEKs(sm1_chassis,MEKName,sm1_configs)" exec="FetchMEKComment(sm1_config,%sm1_configs%,sm1_comment)"/>
+   <textBtn x1="120" y1="240" x2="200" y2="250" text="Chassis:"/>
+   <textBtn x1="210" y1="240" x2="350" y2="250" select="sm1_chassis,%SM_mechlist%"/>
+   <textBtn x1="360" y1="240" x2="370" y2="250" text="+" setvar="sm1_chassis=%sm1_chassis%+1" setvar="sm1_config=0" exec="FetchMEKs(sm1_chassis,SM_MEKName,sm1_configs)" exec="FetchMEKComment(sm1_config,%sm1_configs%,sm1_comment)"/>
+   <textBtn x1="100" y1="260" x2="110" y2="270" text="-" setvar="sm1_config=%sm1_config%-1"  exec="FetchMEKComment(sm1_config,%sm1_config%,sm1_comment)"/>
+   <textBtn x1="120" y1="260" x2="200" y2="270" text="Config:"/>
+   <textBtn x1="210" y1="260" x2="350" y2="270" select="sm1_config,%sm1_configs%"/>
+   <textBtn x1="360" y1="260" x2="370" y2="270" text="+" setvar="sm1_config=%sm1_config%+1"  exec="FetchMEKComment(sm1_config,%sm1_configs%,sm1_comment)"/>
+   <textBtn x1="210" y1="280" x2="350" y2="290" text="%sm1_comment%"/>
+   <textBtn x1="210" y1="300" x2="350" y2="310" text="Mech Lab" exec="MechLab(sm1_config,sm1_configs,sm1_chassis,SM_MEKName,SM_mechlist)"/>
+
+   <textBtn x1="100" y1="340" x2="110" y2="350" text="-" setvar="sm2_chassis=%sm2_chassis%-1" setvar="sm2_config=0" exec="FetchMEKs(sm2_chassis,SM_MEKName,sm2_configs)" exec="FetchMEKComment(sm2_config,%sm2_configs%,sm2_comment)"/>
+   <textBtn x1="120" y1="340" x2="200" y2="350" text="Chassis:"/>
+   <textBtn x1="210" y1="340" x2="350" y2="350" select="sm2_chassis,%SM_mechlist%"/>
+   <textBtn x1="360" y1="340" x2="370" y2="350" text="+" setvar="sm2_chassis=%sm2_chassis%+1" setvar="sm2_config=0" exec="FetchMEKs(sm2_chassis,SM_MEKName,sm2_configs)" exec="FetchMEKComment(sm2_config,%sm2_configs%,sm2_comment)"/>
+   <textBtn x1="100" y1="360" x2="110" y2="370" text="-" setvar="sm2_config=%sm1_config%-1" exec="FetchMEKComment(sm2_config,%sm2_configs%,sm2_comment)"/>
+   <textBtn x1="120" y1="360" x2="200" y2="370" text="Config:"/>
+   <textBtn x1="210" y1="360" x2="350" y2="370" select="sm2_config,%sm2_configs%"/>
+   <textBtn x1="360" y1="360" x2="370" y2="370" text="+" setvar="sm2_config=%sm2_config%+1" exec="FetchMEKComment(sm2_config,%sm2_configs%,sm2_comment)"/>
+   <textBtn x1="210" y1="380" x2="350" y2="390" text="%sm2_comment%"/>
+   <textBtn x1="210" y1="400" x2="350" y2="410" text="Mech Lab" exec="MechLab(sm2_config,sm2_configs,sm2_chassis,SM_MEKName,SM_mechlist)"/>
+</room>
+
+<room name="Wolf_Mission_Briefing" background="1|15.EFA">
+   <!textBtn x1="75" y1="27" x2="552" y2="440" text="Mission %mission%, description"/>
+   <!scrollableText x1="86" y1="50" x2="505" y2="432" bwd="BRF1.BWD"/>
+   <scrollableText x1="77" y1="21" x2="545" y2="448" bwd="BRF1.BWD"/>
+   <textBtn x1="47" y1="456" x2="231" y2="476" text="Situation"/>
+   <textBtn x1="232" y1="456" x2="416" y2="476" text="Launch" exec="runSim"/>
+   <textBtn x1="387" y1="456" x2="601" y2="476" text="Abort" goto="Wolf_Ready_Room"/>
+</room>
+
+<room name="WC_Success" background="1|15.EFA">
+   <!textBtn x1="86" y1="50" x2="519" y2="426" text="Mission %mission% was a success"/>
+   <scrollableText x1="70" y1="21" x2="545" y2="448" bwd="DBFS.BWD"/>
+   <textBtn x1="47" y1="456" x2="231" y2="476" text="Situation"/>
+   <textBtn x1="232" y1="456" x2="416" y2="476" text="Exit" setvar="mission=%mission%+1" goto="Wolf_Ready_Room"/>
+   <textBtn x1="387" y1="456" x2="601" y2="476" text="Replay" goto="WC_Success_Replay"/>
+</room>
+
+<room name="WC_Success_Replay" background="1|15.EFA">
+   <textBtn x1="86" y1="50" x2="519" y2="226" text="Replay - are you sure?"/>
+   <textBtn x1="86" y1="226" x2="301" y2="426" text="Yes" goto="Wolf_Ready_Room"/>
+   <textBtn x1="302" y1="226" x2="519" y2="426" text="No" goto="WC_Success"/>
+</room>
+
+<room name="WC_Fail" background="1|15.EFA">
+   <!textBtn x1="86" y1="50" x2="519" y2="426" text="Mission %mission% was a failure"/>
+   <scrollableText x1="70" y1="21" x2="545" y2="448" bwd="DBFF.BWD"/>
+   <textBtn x1="47" y1="456" x2="231" y2="476" text="Situation"/>
+   <textBtn x1="232" y1="456" x2="416" y2="476" text="Exit" goto="Wolf_Ready_Room"/>
+   <textBtn x1="302" y1="456" x2="601" y2="476" text="Replay" goto="Wolf_Mission_Briefing"/>
+</room>
+
+<room name="Wolf_Mission_Debriefing" background="1|15.EFA">
+   <reg x1="0" y1="450" x2="640" y2="480" goto="Wolf_Ready_Room"/>
+</room>
+
+<room name="Register_Wolf_Sibko_ID" background="1|16.EFA">
+   <textBtn x1="300" y1="455" x2="340" y2="475" color="ff ff ff" text="Accept" goto="Wolf_Hall"/>
+   <textBtn x1="500" y1="455" x2="640" y2="475" color="ff ff ff" text="New Allegiance" goto="Splash_Screen"/>
+</room>
+
+</campaign>

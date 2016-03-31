@@ -1,0 +1,61 @@
+REM                         Mechwarrior2
+REM
+REM  This is the ADV for Mechwarrior 2 by Activision
+REM
+REM
+REM  Written and Tested by Jack Mamais- June 1995
+REM
+REM  Base Switch Settings
+REM  Black Hat switch = analog
+REM  Red Switch       = Digital
+REM
+REM
+REM
+GAME 1 75            REM Game type
+BTN UB /U ENT        REM Weapon selects
+       /M ;          REM Fire all weapons
+       /D F4         REM Targeting camera
+BTN MB /U e          REM Target nearest enemy
+       /M q          REM Target under reticle
+       /D t          REM Cycle through all available targets
+BTN LB /U SHF 2      REM Weapons group 2
+       /M SHF 3      REM Weapons group 3
+       /D SHF 1      REM Weapons group 1
+BTN HU h u           REM Hat up
+BTN HR h r           REM Hat right
+BTN HD h d           REM Hat down
+BTN HL h l           REM Hat left
+BTN HM h m           REM Hat middle
+BTN 1  /U F3         REM Overhead map toggle
+       /M F2         REM Radar Toggle
+       /D z          REM Cockpit zoom in
+BTN 2  /U c          REM Exterior View
+       /M j          REM Jump jets fire
+       /D SHF z      REM Cockpit zoom out
+BTN 3  /U F1         REM Vidscreen toggle
+       /M i          REM Inspect target
+       /D n          REM Toggle through nav points
+BTN 4  /U a          REM Autopilot activate
+       /M v          REM MASC
+       /D \          REM Group Select
+BTN 5  /U o          REM Override automatic shutdown
+       /M l          REM Infrared
+       /D F11        REM Disable HUD
+BTN 6  /U BSP        REM Reverse direction
+       /M F12        REM List mission objectives
+       /D /          REM Recenter torso to legs
+RKR UP /             REM Rocker up
+RKR DN /             REM Rocker down
+THR 25 2 = - = - 0 5 REM Throttle
+REM
+REM
+REM This file works ONLY with the NEW chip and MICROCODE for the MARK II WCS!
+REM
+REM If you do not have the NEW chip and MICROCODE, contact THRUSTMASTER at
+REM (503) 639-3200 and find out how to get the upgrade!!!
+REM
+REM How can you tell if you have the new chip and microcode?  From the
+REM C:\MARK2 DOS prompt, type: DIR MK2LOAD.EXE then hit ENTER. If you receive
+REM the message: "File not found", then you have the OLD microcode version
+REM that uses the program DOWNLOAD.EXE to load files into the WCS MARK II.
+REM

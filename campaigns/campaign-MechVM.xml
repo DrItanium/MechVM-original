@@ -1,0 +1,24 @@
+<campaign startRoom="Mech_Selection"
+      setvar="Missions=bass,jess,clai,newc,jeeh,tim_,andy,fost,hoff,zack,sean,fran,asah,pete,cath,sach,bran"
+      setvar="mission=0" setvar="SuccessRoom=Mech_Selection" setvar="FailureRoom=Mech_Selection" 
+      setvar="chassis=0" setvar="config=0"
+      setstr="mechlist=mw2-Mad Dog,Marauder,mw2-Stone Rhino,warhammer,Kingfisher,Bane,Sagittaire,Viper"
+	  exec="FetchMEKs(chassis,mechlist,configs)" 
+	  exec="FetchMEKComment(config,%configs%,comment)">
+
+<room name="Mech_Selection">
+   <textBtn x1="100" y1="140" x2="110" y2="150" text="-" setvar="chassis=%chassis%-1" setvar="config=0" exec="FetchMEKs(chassis,mechlist,configs)" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="120" y1="140" x2="200" y2="150" text="Chassis:"/>
+   <textBtn x1="210" y1="140" x2="440" y2="150" select="chassis,%mechlist%"/>
+   <textBtn x1="450" y1="140" x2="460" y2="150" text="+" setvar="chassis=%chassis%+1" setvar="config=0" exec="FetchMEKs(chassis,mechlist,configs)" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="100" y1="160" x2="110" y2="170" text="-" setvar="config=%config%-1" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="120" y1="160" x2="200" y2="170" text="Config:"/>
+   <textBtn x1="210" y1="160" x2="440" y2="170" select="config,%configs%"/>
+   <textBtn x1="450" y1="160" x2="460" y2="170" text="+" setvar="config=%config%+1" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="210" y1="180" x2="440" y2="190" text="%comment% (Mech Lab)" exec="MechLab(config,configs,chassis,MEKName,mechlist)"/>
+
+   <textBtn x1="0" y1="420" x2="125" y2="480" text="Exit" exec="exit"/>
+   <textBtn x1="510" y1="430" x2="640" y2="480" text="Launch" exec="runSim"/>
+</room>
+
+</campaign>

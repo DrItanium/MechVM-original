@@ -1,0 +1,469 @@
+<MechList>
+   <import source="mech_annihilator.flt" target="MW3-Annihilator">
+      <mech name = "Annihilator" scale="1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ" ty="1"/>
+         <!windshield path = "head.OBJ" ty="1"/>
+         <LeftArm path = "larm.OBJ" ty="1"/>
+         <LeftArm path = "lhand.OBJ" ty="1"/>
+         <RightArm path = "rarm.OBJ" ty="1"/>
+         <RightArm path = "rhand.OBJ" ty="1"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" tz="-0.3" jy="-2.5" jz="-0.3"/>
+         <LeftFoot path = "lfoot.OBJ" jy="-5"/>
+         <LeftFoot path = "ltoe01.OBJ" jy="-5"/>
+         <LeftFoot path = "ltoe02.OBJ" jy="-5"/>
+         <LeftFoot path = "ltoe03.OBJ" jy="-5"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" tz="-0.3" jy="-2.5" jz="-0.3"/>
+         <RightFoot path = "rfoot.OBJ" jy="-5"/>
+         <RightFoot path = "rtoe01.OBJ" jy="-5"/>
+         <RightFoot path = "rtoe02.OBJ" jy="-5"/>
+         <RightFoot path = "rtoe03.OBJ" jy="-5"/>
+
+         <anim phase = "0" ulegAngle = "15" llegAngle = "-60" footAngle = "-10"/>
+         <anim phase = "0.5" ulegAngle = "40" llegAngle = "-90" footAngle = "10"/>
+      </mech>
+   </import>
+   
+   <import source="mech_avatar.flt" target="MW3-Avatar">
+      <mech name = "Avatar" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-2.4" jz="-1.6"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ"/>
+         <LeftFoot path = "ltoe03.OBJ" jy="-5" jz="0"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-2.4" jz="-1.6"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ"/>
+         <RightFoot path = "rtoe03.OBJ" jy="-5" jz="0"/>
+
+         <anim phase = "0" ulegAngle = "0" llegAngle = "0" footAngle = "20"/>
+         <anim phase = "0.5" ulegAngle = "-30" llegAngle = "-40" footAngle = "40"/>
+      </mech>
+   </import>
+
+   <import source="mech_blackhawk.flt" target="MW3-Blackhawk">
+      <mech name = "Blackhawk" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" tz="-0.5" jy="-4" jz="-0.5"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ" jy="-7" jz="2"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-4"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ" jy="-7" jz="2"/>
+         
+         <anim phase = "0" ulegAngle = "0" llegAngle = "-10" footAngle = "20"/>
+         <anim phase = "0.5" ulegAngle = "-30" llegAngle = "-50" footAngle = "40"/>
+      </mech>
+   </import>
+
+   <import source="mech_bushwacker.flt" target="MW3-Bushwacker">
+      <mech name = "Bushwacker" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-2" jz="-1.65"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ"/>
+         <LeftFoot path = "ltoe03.OBJ"/>
+         <LeftFoot path = "ltoe04.OBJ" jy="-4.9" jz="0.65"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-2" jz="-1.65"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ"/>
+         <RightFoot path = "rtoe03.OBJ"/>
+         <RightFoot path = "rtoe04.OBJ" jy="-4.9" jz="0.65"/>
+
+         <anim phase = "0" ulegAngle = "15" llegAngle = "-20" footAngle = "20"/>
+         <anim phase = "0.5" ulegAngle = "-15" llegAngle = "-50" footAngle = "40"/>
+      </mech>
+   </import>
+
+
+   <import source="mech_cauldron.flt" target="MW3-Cauldron Born">
+      <mech name = "Cauldron Born" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-2.2" jz="-1.55"/>
+         <LeftFoot path = "lfoot.OBJ" ty="3.5" tz="-7"/>
+         <LeftFoot path = "ltoe01.OBJ" ty="3.5" tz="-7"/>
+         <LeftFoot path = "ltoe02.OBJ" ty="3.5" tz="-7" jy="-0.6" jz="-5"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-2.2" jz="-1.55"/>
+         <RightFoot path = "rfoot.OBJ" ty="3.5" tz="-7"/>
+         <RightFoot path = "rtoe01.OBJ" ty="3.5" tz="-7"/>
+         <RightFoot path = "rtoe02.OBJ" ty="3.5" tz="-7" jy="-0.6" jz="-5"/>
+
+         <anim phase = "0" ulegAngle = "-10" llegAngle = "170" footAngle = "195"/>
+         <anim phase = "0.5" ulegAngle = "-30" llegAngle = "140" footAngle = "170"/>
+      </mech>
+   </import>
+
+   <import source="mech_champion.flt" target="MW3-Champion">
+      <mech name = "Champion" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ" ty="0.5"/>
+         <LeftArm path = "lhand.OBJ" ty="0.5"/>
+         <RightArm path = "rarm.OBJ" ty="0.5"/>
+         <RightArm path = "rhand.OBJ" ty="0.5"/>
+         <LeftUpperLeg path = "lthigh.OBJ" jy="0.1" jz="-0.1"/>
+         <LeftLowerLeg path = "lcalf.OBJ" ty="0.2" tz="-0.1" jy="-2.5" jz="-0.3"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ" jy="-4.6" jz="-0.2"/>
+         <RightUpperLeg path = "rthigh.OBJ" jy="0.1" jz="-0.1"/>
+         <RightLowerLeg path = "rcalf.OBJ" ty="0.2" tz="-0.1" jy="-2.5" jz="-0.3"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ" jy="-4.6" jz="-0.2"/>
+
+         <anim phase = "0" ulegAngle = "20" llegAngle = "-70" footAngle = "5"/>
+         <anim phase = "0.5" ulegAngle = "-15" llegAngle = "-30" footAngle = "-5"/>
+      </mech>
+   </import>
+
+   <import source="mech_daishi.flt" target="MW3-Daishi">
+      <mech name = "Daishi" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-2.125" jz="-1.6"/>
+         <LeftFoot path = "lfoot.OBJ" ty="4.2" tz="-6"/>
+         <LeftFoot path = "ltoe01.OBJ" ty="4.2" tz="-6"/>
+         <LeftFoot path = "ltoe02.OBJ" ty="4.2" tz="-6"/>
+         <LeftFoot path = "ltoe03.OBJ" ty="4.2" tz="-6" jy="0.2" jz="-4.75"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-2.125" jz="-1.6"/>
+         <RightFoot path = "rfoot.OBJ" ty="4.2" tz="-6"/>
+         <RightFoot path = "rtoe01.OBJ" ty="4.2" tz="-6"/>
+         <RightFoot path = "rtoe02.OBJ" ty="4.2" tz="-6"/>
+         <RightFoot path = "rtoe03.OBJ" ty="4.2" tz="-6" jy="0.2" jz="-4.75"/>
+
+         <anim phase = "0" ulegAngle = "-15" llegAngle = "150" footAngle = "230"/>
+         <anim phase = "0.5" ulegAngle = "15" llegAngle = "180" footAngle = "200"/>
+      </mech>
+   </import>
+
+   <import source="mech_firefly.flt" target="MW3-Firefly">
+      <mech name = "Firefly" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-1.9" jz="-0.7"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ"/>
+         <LeftFoot path = "ltoe03.OBJ"/>
+         <LeftFoot path = "ltoe04.OBJ" jy="-5.8" jz="0.8"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-1.9" jz="-0.7"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ"/>
+         <RightFoot path = "rtoe03.OBJ"/>
+         <RightFoot path = "rtoe04.OBJ" jy="-6" jz="0.8"/>
+
+         <anim phase = "0" ulegAngle = "-20" llegAngle = "20" footAngle = "0"/>
+         <anim phase = "0.5" ulegAngle = "-40" llegAngle = "-20" footAngle = "20"/>
+      </mech>
+   </import>
+
+   <import source="mech_madcat.flt" target="MW3-Mad Cat">
+      <mech name = "Mad Cat" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-2.7" jz="-1.8"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ"/>
+         <LeftFoot path = "ltoe03.OBJ" jy="-4.8" jz="0.2"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-2.8" jz="-1.9"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ"/>
+         <RightFoot path = "rtoe03.OBJ" jy="-4.8" jz="0.2"/>
+
+         <anim phase = "0" ulegAngle = "-10" llegAngle = "0" footAngle = "0"/>
+         <anim phase = "0.5" ulegAngle = "-50" llegAngle = "-30" footAngle = "20"/>
+      </mech>
+   </import>
+
+   <import source="mech_orion.flt" target="MW3-Orion">
+      <mech name = "Orion" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ" ty = "1"/>
+         <!windshield path = "head.OBJ" ty = "1"/>
+         <LeftArm path = "larm.OBJ" ty = "1"/>
+         <LeftArm path = "lhand.OBJ" ty = "1"/>
+         <RightArm path = "rarm.OBJ" ty = "1"/>
+         <RightArm path = "rhand.OBJ" ty = "1"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-2.5"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ" jy="-5.3"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-2.5"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ" jy="-5.3"/>
+
+         <anim phase = "0" ulegAngle = "0" llegAngle = "-40" footAngle = "-10"/>
+         <anim phase = "0.5" ulegAngle = "40" llegAngle = "-80" footAngle = "10"/>
+      </mech>
+   </import>
+
+   <import source="mech_owens.flt" target="MW3-Owens">
+      <mech name = "Owens" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-2.2" jz="-0.7"/>
+         <LeftFoot path = "ltoe01.OBJ" tx = "1.55" ty = "-6.3" tz = "1.1"/>
+         <LeftFoot path = "ltoe02.OBJ" tx = "1.55" ty = "-6.3" tz = "1.1"/>
+         <LeftFoot path = "ltoe03.OBJ" tx = "1.55" ty = "-6.3" tz = "1.1"/>
+         <LeftFoot path = "ltoe04.OBJ" tx = "1.55" ty = "-6.3" tz = "1.1" jy="-6.3" jz="1"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-2.2" jz="-0.7"/>
+         <RightFoot path = "rtoe01.OBJ" tx = "-1.55" ty = "-6.3" tz = "1.1"/>
+         <RightFoot path = "rtoe02.OBJ" tx = "-1.55" ty = "-6.3" tz = "1.1"/>
+         <RightFoot path = "rtoe03.OBJ" tx = "-1.55" ty = "-6.3" tz = "1.1"/>
+         <RightFoot path = "rtoe04.OBJ" tx = "-1.55" ty = "-6.3" tz = "1.1" jy="-6.3" jz="1"/>
+
+         <anim phase = "0" ulegAngle = "-30" llegAngle = "30" footAngle = "-10"/>
+         <anim phase = "0.5" ulegAngle = "-70" llegAngle = "0" footAngle = "10"/>
+      </mech>
+   </import>
+
+   <import source="mech_puma.flt" target="MW3-Puma">
+      <mech name = "Puma" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" tx="-0.24" jy="-0.8" jz="-1.5"/>
+         <LeftFoot path = "lfoot.OBJ" tx="-0.24" ty="5.5" tz="-3.6"/>
+         <LeftFoot path = "ltoe01.OBJ" tx="-0.24" ty="5.5" tz="-3.6"/>
+         <LeftFoot path = "ltoe02.OBJ" tx="-0.24" ty="5.5" tz="-3.6"/>
+         <LeftFoot path = "ltoe03.OBJ" tx="-0.24" ty="5.5" tz="-3.6" jy="2.2" jz="-2.5"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" tx="0.24" jy="-0.8" jz="-1.5"/>
+         <RightFoot path = "rfoot.OBJ" tx="0.24" ty="5.5" tz="-3.6"/>
+         <RightFoot path = "rtoe01.OBJ" tx="0.24" ty="5.5" tz="-3.6"/>
+         <RightFoot path = "rtoe02.OBJ" tx="0.24" ty="5.5" tz="-3.6"/>
+         <RightFoot path = "rtoe03.OBJ" tx="0.24" ty="5.5" tz="-3.6" jy="2.2" jz="-2.5"/>
+
+         <anim phase = "0" ulegAngle = "0" llegAngle = "-180" footAngle = "180"/>
+         <anim phase = "0.5" ulegAngle = "-40" llegAngle = "-200" footAngle = "200"/>
+      </mech>
+   </import>
+
+   <import source="mech_shadowcat.flt" target="MW3-Shadowcat">
+      <mech name = "Shadowcat" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ" ty = "0.5"/>
+         <!windshield path = "head.OBJ" ty = "0.5"/>
+         <LeftArm path = "larm.OBJ" ty = "0.5"/>
+         <LeftArm path = "lhand.OBJ" ty = "0.5"/>
+         <RightArm path = "rarm.OBJ" ty = "0.5"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-1.2" jz="-1.35"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ"/>
+         <LeftFoot path = "ltoe03.OBJ" jy="-3"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-1.2" jz="-1.35"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ"/>
+         <RightFoot path = "rtoe03.OBJ" jy="-3"/>
+
+         <anim phase = "0" ulegAngle = "-10" llegAngle = "0" footAngle = "0"/>
+         <anim phase = "0.5" ulegAngle = "30" llegAngle = "40" footAngle = "10"/>
+      </mech>
+   </import>
+
+   <import source="mech_strider.flt" target="MW3-Strider">
+      <mech name = "Strider" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ"/>
+         <torso path = "antenna.OBJ"/>
+         <!windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-3" jz="-1"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ" jy="-5.7" jz="1.1"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-3" jz="-1"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ" jy="-5.7" jz="1.1"/>
+
+         <anim phase = "0" ulegAngle = "-10" llegAngle = "0" footAngle = "0"/>
+         <anim phase = "0.5" ulegAngle = "30" llegAngle = "40" footAngle = "20"/>
+      </mech>
+   </import>
+
+   <import source="mech_sunder.flt" target="MW3-Sunder">
+      <mech name = "Sunder" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ" ty = "0.6"/>
+         <!windshield path = "head.OBJ" ty = "0.6"/>
+         <LeftArm path = "larm.OBJ" ty = "0.6"/>
+         <LeftArm path = "lhand.OBJ" ty = "0.6"/>
+         <RightArm path = "rarm.OBJ" ty = "0.6"/>
+         <RightArm path = "rhand.OBJ" ty = "0.6"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-2.8"/>
+         <LeftFoot path = "lfoot.OBJ" jy="-5" jz="0.2"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-2.8"/>
+         <RightFoot path = "rfoot.OBJ" jy="-5" jz="0.2"/>
+
+         <anim phase = "0" ulegAngle = "0" llegAngle = "-40" footAngle = "0"/>
+         <anim phase = "0.5" ulegAngle = "30" llegAngle = "-80" footAngle = "-10"/>
+      </mech>
+   </import>
+
+   <import source="mech_supernova.flt" target="MW3-Supernova">
+      <mech name = "Supernova" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ" ty = "0.75" tz="0.6"/>
+         <!windshield path = "head.OBJ" ty = "1.5"/>
+         <LeftArm path = "larm.OBJ" ty = "0.75" tz="0.6"/>
+         <LeftArm path = "lhand.OBJ" ty = "0.75" tz="0.6"/>
+         <RightArm path = "rarm.OBJ" ty = "0.75" tz="0.6"/>
+         <RightArm path = "rhand.OBJ" ty = "0.75" tz="0.6"/>
+         <LeftUpperLeg path = "lthigh.OBJ"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy = "-1.2" jz = "-2.3"/>
+         <LeftFoot path = "lfoot.OBJ" ty = "7.5" tz = "-4.5"/>
+         <LeftFoot path = "ltoe01.OBJ" ty = "7.5" tz = "-4.5"/>
+         <LeftFoot path = "ltoe02.OBJ" ty = "7.5" tz = "-4.5"/>
+         <LeftFoot path = "ltoe03.OBJ" ty = "7.5" tz = "-4.5" jy = "3.75" jz = "-2.2"/>
+         <RightUpperLeg path = "rthigh.OBJ"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy = "-1.2" jz = "-2.3"/>
+         <RightFoot path = "rfoot.OBJ" ty = "7.5" tz = "-4.5"/>
+         <RightFoot path = "rtoe01.OBJ" ty = "7.5" tz = "-4.5"/>
+         <RightFoot path = "rtoe02.OBJ" ty = "7.5" tz = "-4.5"/>
+         <RightFoot path = "rtoe03.OBJ" ty = "7.5" tz = "-4.5" jy = "3.75" jz = "-2.2"/>
+         <anim phase = "0" ulegAngle = "0" llegAngle = "220" footAngle = "120"/>
+         <anim phase = "0.5" ulegAngle = "-20" llegAngle = "200" footAngle = "130"/>
+      </mech>
+   </import>
+   
+   <import source="mech_thor.flt" target="MW3-Thor">
+      <mech name = "Thor" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ" ty = "0.9"/>
+         <!windshield path = "head.OBJ" ty = "0.9"/>
+         <LeftArm path = "larm.OBJ" ty = "0.9"/>
+         <LeftArm path = "lhand.OBJ" ty = "0.9"/>
+         <RightArm path = "rarm.OBJ" ty = "0.9"/>
+         <RightArm path = "rhand.OBJ" ty = "0.9"/>
+         <LeftUpperLeg path = "lthigh.OBJ" jz="-0.5"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-3"/>
+         <LeftFoot path = "lfoot.OBJ" jy="-5"/>
+         <RightUpperLeg path = "rthigh.OBJ" jz="-0.5"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-3"/>
+         <RightFoot path = "rfoot.OBJ" jy="-5"/>
+
+         <anim phase = "0" ulegAngle = "0" llegAngle = "-30" footAngle = "-10"/>
+         <anim phase = "0.5" ulegAngle = "30" llegAngle = "-60" footAngle = "10"/>
+      </mech>
+   </import>
+
+   <import source="mech_vulture.flt" target="MW3-Vulture">
+      <mech name = "Vulture" scale = "1">
+         <hip path = "hip_polys.OBJ"/>
+         <torso path = "torso_polys.OBJ" ty = "0.42"/>
+         <windshield path = "head.OBJ"/>
+         <LeftArm path = "larm.OBJ"/>
+         <LeftArm path = "lhand.OBJ"/>
+         <RightArm path = "rarm.OBJ"/>
+         <RightArm path = "rhand.OBJ"/>
+         <LeftUpperLeg path = "lthigh.OBJ" jy="-0.2"/>
+         <LeftLowerLeg path = "lcalf.OBJ" jy="-2.6" jz="-1.8"/>
+         <LeftFoot path = "lfoot.OBJ"/>
+         <LeftFoot path = "ltoe01.OBJ"/>
+         <LeftFoot path = "ltoe02.OBJ"/>
+         <LeftFoot path = "ltoe03.OBJ" jy="-5"/>
+         <RightUpperLeg path = "rthigh.OBJ" jy="-0.2"/>
+         <RightLowerLeg path = "rcalf.OBJ" jy="-2.6" jz="-1.8"/>
+         <RightFoot path = "rfoot.OBJ"/>
+         <RightFoot path = "rtoe01.OBJ"/>
+         <RightFoot path = "rtoe02.OBJ"/>
+         <RightFoot path = "rtoe03.OBJ" jy="-5"/>
+
+         <anim phase = "0" ulegAngle = "0" llegAngle = "5" footAngle = "10"/>
+         <anim phase = "0.5" ulegAngle = "-30" llegAngle = "-25" footAngle = "-10"/>
+      </mech>
+   </import>
+</MechList>

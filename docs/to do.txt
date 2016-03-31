@@ -1,0 +1,52 @@
+- MW3 Registry Keys anlegen
+
+2009-02-28:
+Atlas: Füsse
+Battle Hawk: Füsse
+Dire Wolf: Hüfte und Gehanimation
+Firemoth: Gehanimation geht durch rückwärtigen Schild
+Gargoyle: Füsse
+Grim Reaper: mehr in die Knie?
+Linebacker: Läuft "bergab"?
+Rifleman: Normale Arme?
+Thug: Gehanimation merkwürdig
+Victor: kleine Füsse
+
+- Nachricht, dass Import abgeschlossen ist, auch ins Meldungsfenster kopieren
+- GBL-BP: Installation noch nicht möglich
+- mercs-bp-Variante in Titanium interessant?
+
+2008-06-16:
+Missing Weapons:
+Stats für IS2_Arrow_IV, Ammo, Clan_Nuke, IS2_SRM_Ammo_Inferno
+IS Arrow IV (CPLT-C3 Catapult), Code 6501, weder in Tech Manual noch Total Warfare, dafür in BattleTech Compendium und Rules of Warfare
+IS Inferno SRM, IS Inferno Streak SRM: Codes 6300, 6400, aber in MechVM nur als Munition
+Hat die Clan Nuke Munition mit Code 13000?
+Es fehlen noch die X-Pulse Lasers und Clan Heavy Lasers
+
+Die Mercs-Salamander-Konfiguration ist völlig falsch, es sind nur LRM15 statt der drei LRM 20 vorhanden,
+die Tonnage beträgt nur 70 statt 80 Tonnen. Sollte korrigiert werden.
+
+2008-06-09:
+Beim Import soll für Mechs mit Triple Heat Sinks eine Fehlermeldung ausgegeben werden.
+
+Auf der Website Whammy's Mechs als separaten Download anbieten, oder erst, wenn
+dafür ein Binärformat bereit steht?
+
+2008-06-16:
+Neuerdings wird die PRJ zwecks Modifikation standardmäßig read-write geöffnet.
+Das geht aber nicht auf CD's. Wenn das Öffnen des PRJ fehlschlägt, sollte es also
+nochmal read-write versucht werden. Vor jeder Modifikation dann den Zustand
+(read, read-write) prüfen
+
+2008-06-17:
+Collect all file format specific code in MW2FileFormats.cpp/.h
+
+2008-06-17:
+Ist es möglich, vor dem Inhaltsverzeichnis einer .ZBD Bytes einzufügen?
+Wenn ja, wird die Position des Inhaltsverzeichnisses eines .ZBD am Dateiende
+abgelegt, sonst liegt ein Verweis am Dateianfang?
+
+2008-06-18:
+File Replacement und Adding für Net.PRJ ausschließen, wenn nicht bestimmter Compiler-Schalter gesetzt ist?
+Test: falls PRJ kleiner als 15MB ist, kann es nur NetMech sein ...

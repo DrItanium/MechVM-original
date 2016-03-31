@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="MW2">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Widgets">
+      <UniqueIdentifier>{5223a991-f63b-4ac7-ab50-7b578177e031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D Objects">
+      <UniqueIdentifier>{878e7a64-327f-44a7-9624-2f99558ab598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base/Math">
+      <UniqueIdentifier>{ed1b2fd2-2525-4b11-8f6a-3e86dc28a5da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Simulation">
+      <UniqueIdentifier>{63e87913-464d-4efb-b5b4-4ace153d2793}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Archive.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BipedMech.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Database_MW2.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LZdecode.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MechLab.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MechShell.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MechVM.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MechWarrior3ZBD.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MechWarriorIIPRJ.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MechWarriorInstallers.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MW2MechImporter.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MWBase.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\QuadMech.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Vehicles.cpp">
+      <Filter>MW2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\dialogs.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLButton.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLComboBox.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLContextMenu.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLLabel.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLLineEdit.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLScrollbar.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLSlider.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLSplitter.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLTableView.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLWindow.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLWindowContainer.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Toolbar.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Color.cpp">
+      <Filter>3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Heightfield.cpp">
+      <Filter>3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Mesh.cpp">
+      <Filter>3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Mesh2.cpp">
+      <Filter>3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MeshPolygon.cpp">
+      <Filter>3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Point3D.cpp">
+      <Filter>3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RenderableObject.cpp">
+      <Filter>3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Texture.cpp">
+      <Filter>3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TextureCompiler.cpp">
+      <Filter>3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BGBase.cpp">
+      <Filter>Base/Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BGString.cpp">
+      <Filter>Base/Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Config.cpp">
+      <Filter>Base/Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\FileCache.cpp">
+      <Filter>Base/Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\FramerateCounter.cpp">
+      <Filter>Base/Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\intersections.cpp">
+      <Filter>Base/Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ISO9660.cpp">
+      <Filter>Base/Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Matrix.cpp">
+      <Filter>Base/Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\XMLTree.cpp">
+      <Filter>Base/Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MechSim.cpp">
+      <Filter>Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\VehicleAI.cpp">
+      <Filter>Simulation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Archive.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BipedMech.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Database_MW2.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LZdecode.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MechLab.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MechShell.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MechVM.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MechWarrior3ZBD.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MechWarriorIIPRJ.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MechWarriorInstallers.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MW2MechImporter.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MWBase.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\QuadMech.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Vehicles.h">
+      <Filter>MW2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\dialogs.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLButton.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLComboBox.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLContextMenu.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLLabel.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLLineEdit.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLScrollbar.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLSlider.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLSplitter.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLTableView.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLWindow.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLWindowContainer.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Toolbar.h">
+      <Filter>Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Color.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Heightfield.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Mesh.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Mesh2.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Mesh3.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MeshPolygon.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Point3D.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RenderableObject.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Texture.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TextureCompiler.h">
+      <Filter>3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGBase.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGString.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGVector.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Config.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\FileCache.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\FramerateCounter.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\intersections.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ISO9660.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Matrix.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\random.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SimpleFuncs.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\XMLTree.h">
+      <Filter>Base/Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MechSim.h">
+      <Filter>Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\VehicleAI.h">
+      <Filter>Simulation</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Changelog.txt" />
+    <None Include="..\readme.txt" />
+  </ItemGroup>
+</Project>

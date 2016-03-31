@@ -1,0 +1,108 @@
+2010-05-30: When installing GBL-TT, MechVM checks for 31stcc's database.mw2
+            If found, MechVM shell uses that file, GBL's engine nad GBL's MW2.PRJ 
+			to play the Clan Wolf and Jade Falcon missions from MW2:31stCC
+
+2010-05-30: Weapon groups can be configured in Mercs-DOS and Titanium
+			
+2010-05-18: Using DosBox 0.74
+
+2010-05-01: Added support for Quad Mechs
+
+2010-04-27: petemod.zip allows to use USERSTAR.BWD in the underwater strike,
+            and MechVM shell allows to configure a special underwater Mech
+
+2010-04-26: Added support for star configurations
+
+2010-04-24: Added support for persistent MechVM shell variables in MechVM.cfg
+            (variable list stored in variable "persistent")
+
+2010-04-23: Mech Lab now works for the most part
+
+2010-04-04: Added an installer for NetMech that extracts a ZIP file
+
+2010-03-20: Ported to SDL
+
+2010-03-17: Mechs are walking on solid ground
+
+2010-02-20: No longer necessary to Alt-Tab to console to launch DOS games under Windows XP.
+            Feeding an empty fake dplay.dll to the Win95 versions to satisfy an external dependency.
+
+2010-01-09: - MechVM shell now launches non-DosBox games
+            - Win95 versions can be launched with admin rights using BAT files
+
+2010-01-05: Added support for installing hybrid GBL DOS+Win
+
+2010-01-03: Refactored CD detection and added MercNet installation
+
+2009-12-27: MechVM shell displays  mission briefing texts
+
+2009-12-25: MechLab integrated into MechVM shell
+
+2009-11-28: All games are again installed into the games subdirectory,
+            DosBox mounts that directory as necessary
+
+2009-11-26: BattlePack installer works
+
+2009-11-23: First MEK files are written successfully
+			- Ammo assignments not stored correctly yet
+
+2009-11-20: Added installer for MW2:31stCC, NetMech edition
+
+2009-08-30: Added support to select Mech configs in MechVM's MW2 shell
+            - Configs are taken from MW2.PRJ or the MEK subdirectory
+
+2009-08-06: Every installation creates a file install-report.txt 
+            that will help me diagnose problems with installations
+
+2009-08-01: DOS editions of MW2 are now installed into DosBox,
+            and DOS and Titanium Trilogy games can be started from MechVM
+            => Mercs lässt sich aus MechVM nicht starten, in MechVM's DosBox
+               ebenfalls nicht, aber von der DosBox auf Laufwerk C:
+               (Sim schreibt SYS_CDNOTFOUND o.ä.)
+            => 31stcc-dos funktioniert nicht
+            => campain*.xml versucht immer, die Simulation über DosBox zu starten,
+               auch wenn das Programm für native Ausführung eingerichtet wurde
+            => MechVM.cfg nur am Ende einer Installation zurückschreiben
+
+2009-05-24: Added translation support
+2009-05-06: Restored 3D dialog corners
+2009-04-20: Added armor dialog to Mech Lab
+
+2009-03-20: Dramatic performance improvements for importing MW2 mechs
+
+2009-02-02: Fixed a bug in replacing files in MW2.PRJ
+Previously, files with size 0 or offset 0 were not displayed.
+This introduces difficulties when dealing with files referenced
+by number and replacing files with larger ones, so now all files
+will be displayed
+
+2009-01-29: Support for importing MW2 mechs with textures
+
+2009-01-10: MechVM will import mechs from all supported installations
+
+2008-11-24: Importing of MW3 mechs now possible
+
+2008-11-16: Mech extraction works for 3D enhanced versions
+
+2008-08-30: MW2 shell screens can be decoded
+
+2008-06-20: 
+Changed MechWarriorIIPRJ, Database_MW2 and MechWarrior3ZBD to
+be subclasses of a new class MWArchive. Many interactions with these
+classes now use the generic MWArchive, making it possible to use the
+PRJ explorer with the *.MW2 and *.ZBD files. File Extraction now uses
+a single algorithm for all archive types and supports creation of a 
+report file for all archive types, which was previously possible only with
+PRJ files.
+
+2008-06-22:
+Added support for importing from for user-specified locations, needed for 
+NetMech and under Linux.
+
+2008-06-22:
+Setting compatibility flags for Windows 95 after installing
+
+---
+
+todo:
+- DosBox-Verzeichnis-Variable "captures" setzen?

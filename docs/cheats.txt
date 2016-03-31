@@ -1,0 +1,70 @@
+======
+Cheats
+======
+
+Kann man für die Unterwassermission in GBL einen eigenen
+Mech designen, indem man in einer anderen Mission einen
+eigenen Gargoyle erstellt?
+
+MechWarrior 2 Level Select
+To access all levels type in at the sibko identification screen: FREEBIRTHTOAD, then go to the ready room. All levels are either colors or names. The colors are regular missions and the names are the Trials For Position. Entering the mech lab will crash the game?
+
+MechWarrior 2 Bonus Mechs
+In the Trials of Grievance, enter your name (and/or your starmates' names) in Star Config as one of the following.
+
+Enzo to gain the Battlemaster 'mech
+Calvin to gain the Elemental 'mech
+
+Unfortunately, due to a programming slip-up, if you try to play as the Battlemaster the game will crash.
+
+Nachdem man den Cheat-Modus durch gleichzeitiges Drücken von CAPS STRG ALT aktiviert hat, stehen folgende Tastenkombinationen zur Verfügung:
+
+Cheat 	Funktion
+ANTIJOLT	Zeitexpansion an/aus
+BLORB 	Unverwundbarkeit
+CIA 	unendlich Munition
+COLDMISER 	Hitzesucher ein/aus
+DORCS 	Credits
+DEI FEIF DORCS 	zeigt einige Gags der Programmierer
+ENOLAGAY 	zerstört alle Gegner
+FLASHYFLASHY	Autogruppierung an/aus
+FLYGIRL 	Jump Jets
+GANKEM 	anvisierten Gegner töten
+HANGAROUND 	Zeitanzeige
+ICANTHACKIT 	beendet das Level erfolgreich
+IDKFA 	beendet das Level erfolglos
+LAIRDO 	Schmährufe an die Gegner
+MEEPMEEP	Zeitkompression aus
+MICHELIN 	zeigt die Trefferzonen der Mechs an
+MIGHTYMOUSE 	unendlich Treibstoff für Jump Jets
+TINKERBELL 	Außenkamera frei beweglich
+TLOFRONT 	Wechsel zwischen Vorwärts- und Rückwärtssicht
+UNMEEPMEEP 	Zeitkompression aus
+WALKTHISWAY	Fadenkreuz-Hilfe
+XRAY 	Röntgensicht
+ZMAK 	mehr Spielzeit
+
+GBL:
+BURR	Heat Tracking aus
+CLARK	Röntgenblick
+KABOOM	Zersört Deinen Gegner und Dich, falls nicht unbesiegbar
+JUMBO	Jump Jets
+KENT	Unbesiegbar
+PALEX	Zerstört markierten Mech
+TIK	Kollision an
+
+
+Cheats (3Dfx-Version):
+
+Diese Cheats funktionieren bei der 3Dfx-Version von Mechwarrior 2. Sie werden während dem Spiel eingetippt, dabei muß man die Tasten STRG ALT SHIFT gedrückt halten!
+Cheat 	Funktion
+SU 	Unverwundbarkeit
+IS 	unbegrenzt Munition
+BE 	freier Blickwinkel
+LI 	Mission erfolgreich beenden
+IN 	Jump-Jets
+CE 	unendlich viele Jump-Jets
+CR 	unbegrenzt Treibstoff für Jump-Jets
+OO 	Heat-Tracking
+RE 	anvisiertes Ziel zerstören
+IT 	anvisiertes Ziel mit "Nuke" zerstören

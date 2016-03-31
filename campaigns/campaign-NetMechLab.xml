@@ -1,0 +1,25 @@
+<campaign startRoom="Mech_Lab"
+      setvar="chassis=0" setvar="config=0"
+      setstr="mechlist=mw2-Firemoth,mw2-Tarantula,mw2-Kit Fox,mw2-Jenner IIC,mw2-Nova,mw2-Stormcrow,mw2-Mad Dog,mw2-Hellbringer,mw2-Rifleman IIC,mw2-Summoner,mw2-Timber Wolf,mw2-Gargoyle,mw2-Warhammer IIC,mw2-Warhawk,mw2-Marauder IIC,mw2-Dire Wolf"
+      setstr="BWDName=FIREMOTH,TARANTUL,KITFOX,JENNER,NOVA,STRMCROW,MADDOG,HELLBRGR,RIFLEMAN,SUMMONER,TIMBRWLF,GARGOYLE,WARHAMMR,WARHAWK,MARAUDER,DIREWOLF"
+      setstr="MEKName=FRM,TAR,KTF,JNR,NVA,STM,MDG,HLB,RFL,SMN,TBR,GRG,WHM,WHK,MRD,DRW"
+      setstr="configs=(primary),(Alt. Conf. A),(Alt. Conf. B),(Alt. Conf. C)"
+      setstr="SimType=none"
+	  exec="FetchMEKs(chassis,MEKName,configs)"
+	  exec="FetchMEKComment(config,%configs%,comment)">
+
+<room name="Mech_Lab">
+   <textBtn x1="0" y1="420" x2="640" y2="480" text="Exit" exec="exit"/>
+   <textBtn x1="100" y1="140" x2="110" y2="150" text="-" setvar="chassis=%chassis%-1" setvar="config=0" exec="FetchMEKs(chassis,MEKName,configs)" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="120" y1="140" x2="200" y2="150" text="Chassis:"/>
+   <textBtn x1="210" y1="140" x2="350" y2="150" select="chassis,%mechlist%"/>
+   <textBtn x1="360" y1="140" x2="370" y2="150" text="+" setvar="chassis=%chassis%+1" setvar="config=0" exec="FetchMEKs(chassis,MEKName,configs)" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="100" y1="160" x2="110" y2="170" text="-" setvar="config=%config%-1" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="120" y1="160" x2="200" y2="170" text="Config:"/>
+   <textBtn x1="210" y1="160" x2="350" y2="170" select="config,%configs%"/>
+   <textBtn x1="360" y1="160" x2="370" y2="170" text="+" setvar="config=%config%+1" exec="FetchMEKComment(config,%configs%,comment)"/>
+   <textBtn x1="210" y1="180" x2="350" y2="190" text="%comment%"/>
+   <textBtn x1="210" y1="200" x2="350" y2="210" text="Mech Lab" exec="MechLab(config,configs,chassis,MEKName,mechlist)"/>
+</room>
+
+</campaign>

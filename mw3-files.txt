@@ -1,0 +1,39 @@
+=======================
+MechWarrior 3 - Files
+=======================
+
+MW3 archives use the .ZBD format. It does not have a header or a signature. The file layout is described in MW3-files.ods. The archives store the list of contents either at the start or the end of the file. There appers to be no rule about whether the contents table is at the start or the end of the file, or which records type is used for the contents table. In other words, you need to know where the descriptions are stored and in which format, as this information differs for each archive.
+
+Mechs are stored in .FLT format? I don't know yet whether the .FLT files stores 2d data, 3d data, or mech configs.
+
+=============
+.MW3: Mech Configs
+=============
+
+These configs are stored in the configs subdirectory. They use the extension .MW3. The user's configuration name is stored at offset 8 and may be 16 bytes long. Several configs for a single chassis are stored in a single file.
+
+=====
+Images
+=====
+
+Some images apparently use signature 05000000h. The horizontal resolution is stored at offset 4, the vertical resolution is stored at offset 6, both are words. Data starts at offset 16, each pixel is 16 bits.
+
+There appears to be a similar file format 0b000000h. It starts similar to 05000000h, but it contains an 8-bit image at EOF. In some cases, the 16-bit part of the file contains nonsense data, whereas the 8-bit part at the EOF contains the actual data.
+
+=====
+FLT files
+=====
+
+These files store the mech geometry as a scene graph consisting of several named nodes. Each section reflects a scene graph node and it starts with a fixed-length record of 160 bytes. If the DWORD at 3Ch inside the section is non-zero, there is additional data, likely the geometry.
+
+Each section starts with a 32-byte array holding a zero-terminated string, giving the section's name. The first section contains the file name, the second the mech name. Then follow additional sections like torso, butt, hip, firepoints (numbered), head, rthigh, rarm, and others.
+
+If there is a limit of 256 vertices per section, then polygons could be defined by byte indices into the vertex array. It is possible that the geometry consists entirely of triangles. Otherwise, there would have to be some bytes defining the number of vertices in a polygon. I have not found a directory of sections containing pointers to the sections. Rather, one section just seems to follow the next. 
+
+There is a flag at offset D0h inside a scene graph node. It has value 20h or 28h.
+
+There appear to be three blocks defining the geometry. The first two have about the same size, whereas the last is much larger. The first block consists of floating-point data in the range -10 to 10. The second block consists of 36-byte records whose number is stored at offset 170h. The data in the second block does not appear to make sense as floating point. The last block often contains the hex sequence 00 00 7F 43, which can be interpreted as a floating point number with value 255.0. 
+
+The shortest section found so far had a length of 24Ch bytes in mech_puma_hud.flt at offset 4548h (crack01). It probably defines a single quad to display a texture showing a crack in the cockpit.
+
+At offset 194h in the section, there are three offsets. The offsets are big, and it is not known at this time what they point into.

@@ -1,0 +1,60 @@
+Das hier ist ein Teil eines dumps von HIGHLAND.BWD (mw2 mercs); ich lese die OBJ Sektionen als Folge von int16_t ein:
+
+MON(0):
+OBJ(52):    0    -1    -1     1     0     1     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0   112     0  8697 (   DUMMY)     0 
+REPR(0):
+OBJ(52):    1     0    -1     1     0     1     0     1     0     0     0     0     0     0     0     0     0   801     0     0     0     0     0     0  2267 (HL1_HIPS)     0 
+OBJ(52):    2     1    -1     1     0     1     0     1     0     0     0     0     0     0     0  -115    -1   -55    -1     0     0     0     0     0  2260 (HL1LULEG)     0 
+OBJ(52):    3     2    -1     1     0     1     0     1     0     0     0     0     0     0     0  -133    -1  -275    -1    18     0     0     0     0  2258 (HL1LLLEG)     0 
+OBJ(52):    4     3    -1     1     0     1     0     1     0     0     0     0     0     0     0  -114    -1   -86    -1    -5    -1     0     0     0  2255 (HL1DECLL)     0 
+OBJ(52):    5     3    -1     1     0     1     0     1     0     0     0     0     0     0     0   -17    -1  -337    -1     4     0     0     0     0  2259 (HL1LRTOE)     0 
+OBJ(52):    6     5    -1     1     0     1     0     1     0     0     0     0     0     0     0     0     0   -89    -1   112     0     0     0     0  2257 (HL1LFTOE)     0 
+OBJ(52):    7     1    -1     1     0     1     0     1     0     0     0     0     0     0     0   115     0   -55    -1     0     0     0     0     0  2264 (HL1RULEG)     0 
+OBJ(52):    8     7    -1     1     0     1     0     1     0     0     0     0     0     0     0   133     0  -275    -1    18     0     0     0     0  2262 (HL1RLLEG)     0 
+OBJ(52):    9     8    -1     1     0     1     0     1     0     0     0     0     0     0     0   108     0   -86    -1    -5    -1     0     0     0  2256 (HL1DECLR)     0 
+OBJ(52):   10     8    -1     1     0     1     0     1     0     0     0     0     0     0     0     5     0  -337    -1     4     0     0     0     0  2263 (HL1RRTOE)     0 
+OBJ(52):   11    10    -1     1     0     1     0     1     0     0     0     0     0     0     0     0     0   -89    -1   112     0     0     0     0  2261 (HL1RFTOE)     0 
+OBJ(52):   12     1    -1     1     0     1     0     1     0     0     0     0     0     0     0     0     0   160     0     4     0     0     0     0  2266 (HL1_HEAD)     0 
+OBJ(52):   13    12    -1     1     0     1     0     1     0     0     0     0     0     0     0     0     0   425     0   103     0     0     0     0  2265 (HL1WINSH)     0 
+OBJ(52):   14    12    -1     1     0     1     0     1     0     0     0     0     0     0     0     2     0   216     0   216     0     0     0     0  2254 (HL1DECLF)     0 
+OBJ(52):   15    12    -1     1     0     1     0     1     0     0     0     0     0     0     0  -127    -1   -37    -1  -235    -1     0   112     0  8697 (   DUMMY)     0 
+OBJ(52):   16    12    -1     1     0     1     0     1     0     0     0     0     0     0     0   115     0   -37    -1  -235    -1     0   112     0  8697 (   DUMMY)     0 
+OBJ(52):   17    12    -1     1     0     1     0     1     0     0     0     0     0     0     0     0     0   421     0   102     0     0   112     0  8697 (   DUMMY)     0 
+OBJ(52):   18    12    -1     1     0     1     0     1     0     0     0     0     0     0     0    -1    -1   496     0   158     0     0   112     0  8697 (   DUMMY)     0 
+OBJ(52):   19    12    -1     1     0     1     0     1     0     0     0     0     0     0     0     2     0    48     0   236     0     0   112     0  8697 (   DUMMY)     0 
+OBJ(52):   20    12    -1     1     0     1     0     1     0     0     0     0     0     0     0  -144    -1   176     0   198     0     0   112     0  8697 (   DUMMY)     0 
+OBJ(52):   21    12    -1     1     0     1     0     1     0     0     0     0     0     0     0   147     0   177     0   198     0     0   112     0  8697 (   DUMMY)     0 
+OBJ(52):   22    12    -1     1     0     1     0     1     0     0     0     0     0     0     0   -11    -1   181     0    -4    -1     0   112     0  8697 (   DUMMY)     0 
+OBJ(52):   23    22    -1     1     0     1     0     1     0     0     0     0     0     0     0  -184    -1    -6    -1    -1    -1     0     0     0  2268 (HL1_LARM)     0 
+OBJ(52):   24    23    -1     1     0     1     0     1     0     0     0     0     0     0     0  -144    -1  -204    -1   503     0     0   112     0  8697 (   DUMMY)     0 
+OBJ(52):   25    22    -1     1     0     1     0     1     0     0     0     0     0     0     0   206     0    -6    -1    -1    -1     0     0     0  2269 (HL1_RARM)     0 
+OBJ(52):   26    25    -1     1     0     1     0     1     0     0     0     0     0     0     0   145     0  -211    -1   503     0     0   112     0  8697 (   DUMMY)     0 
+REPR(0):
+__________ a ___ b __________________________________________________________________________________ x _________ y _________ z _________________________ wtb
+
+Die erste Spalte (a) dient der Identifikation; die zweite (b) verweist auf (a). Damit werden
+die einzelnen Teile miteinander verknuepft. Die Offsets (x, y, z) werden entsprechend aufaddiert.
+
+Als Beispiel:
+
+HL1_HIPS : 0, 801, 0
+HL1LULEG : -115, 746, 0
+HL1LLLEG : -248, 471, 18
+HL1DECLL : -362, 385, 13
+HL1LRTOE : -265, 134, 22 (haengt an LLEG, nicht DECLL)
+... usw
+
+Keine Ahnung was dummy 15 bis 21 sein sollen; vielleicht Trefferzonen?
+
+
+Bezueglich der 3DI Dateien: Hast du da schon was gefunden? Bisher sehe ich nur sehr wenig
+Struktur; d.h. ich vermute es sieht etwa so aus:
+
+* Header (8 byte); der Wert an offset 0 sei "k"
+* k Bloecke von je 136 byte (beginnt jeweils mit Nummer 0..k-1)
+* Rest
+
+Das gilt allerdings nur fuer die Mech-Anims.
+
+... Lesen hilft; ok, 8-byte records am Ende, Anzahl bei offset 4. Bleibt also nur
+noch der eigentliche Inhalt :-)

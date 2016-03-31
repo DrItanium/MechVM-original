@@ -1,0 +1,214 @@
+Artificial Intelligence
+=============
+
+Though not intelligent, the goal of the AI is to play
+as challenging as an actual player, with enough 
+parameters to mimic any level of ability. Each player
+has a number of mission goals, which define goals
+for the next minutes. The AI also needs shorter-term
+goals, mostly including waypoints for the next several
+seconds. Networks also matter for this design, because
+lag-shooting should not be necessary. This can be 
+prevented by sending planned AI waypoints, which greatly
+reduces the amount of data that has to be sent. For players,
+the network code should only send current and predicted 
+speed and direction values.
+
+The bot AI is split into several parts:
+
+- Waypoint planning
+- Aiming and firing
+- Mission goal strategy
+
+In combat, choosing the correct waypoints is the most 
+challenging task. Factors for computing waypoints include:
+
+- unreachable/unpassable terrain (conventional route planning)
+- Preference get behind the targeted mech
+- Preferred fighting distance
+- Distance from other opposing forces (avoiding encumbrance)
+
+Aiming and firing is less difficult to model than waypoint planning.
+It mostly involves keeping the torso aimed at the enemy, and 
+adding random angles to model aiming errors. The pilot will shoot
+when satisfied with his aim, and the software determines the damage
+and hit location based on local data. Only damage and hit location
+data needs to be sent over network.
+
+======
+Rendering
+======
+
+Rendering should use glDraw* commands. They're fast.
+
+Create OpenGL arays for 64x64 heightfield cells. Render
+these cells using glDraw calls, after checking which of
+these cells are visible. 
+
+Alternatively, create LOD vertex arrays and render lines
+separately. Additional vertex arrays can be created for
+the interfaces between the levels of detail.
+
+Nice lighting and shadow algorithms.
+
+Landscape rendering does not require depth testing if
+the landscape is rendered rear-to-front. Instead, try to set
+up OpenGL to write a single depth value for the entire 
+polygon. This is needed to render mechs correctly if level
+of detail is applied: if the mech would walk into a concavity
+that is simplified away because of its distance, normally its
+legs would disappear. The reduced depth value does not cause
+this problem, it merely reduces costs of transform and lighting.
+
+To circumvent popping artifacts in the level of detail landscape
+rendering, if several polygons replace a single polygon, the polygons
+should at first be aligned to the old polygon, but when the user
+goes nearer that polygon, it should be interpolated into its actual
+position. On the other hand, this slos down rendering because precompiled
+vertex arrays cannot be used. So the user should be able to choose
+whether he prefers full performance or no popping artifacts.
+
+There are probably some nice landscape rendering papers covering this
+and other problems.
+
+===============
+Battletech rules adoption
+===============
+
+Test which rules can be improved by computer simulation, drop
+unneccesary limitations.
+
+MW2 was strict in allowing only engines with a rating of 1x, 2x, 3x 
+the tonnage, but MW3 allowed all engine ratings. MW4 only allowed
+engine upgrades to be installed.
+
+What I really want is this: any engine rating greater than the tonnage
+should be allowed. The movement speeds should be computed from
+the actual current tonnage, so if you shoot tons of ammo, your mech
+gets faster.
+
+I'm really no fan of MW4's hardpoint system. Given proper tools, time
+and/or money, any change that's legal in BattleTech boarch game rules
+should be possible. That's dramatically different in the field, during an
+ongoing campaign. In that case, only small refits should be allowed,
+but installing energy weapons should always be possible - they only
+need energy, after all. Weapons that need ammo may be refittet only if the
+ammo fits in the same location, creating ammo feeds in the field is
+too difficult a task. And, of course, if repairs take too long, enemy
+raiders could attack.
+
+MW3's concept of a mobile field base could also be applied to clan
+campaigns, in that you first select equipment for the campaign, but
+then you're stuck with that. If refits/repairs take too long, you can 
+select another mech from stock.
+
+For inner sphere campaigns, and mercenary/pirate campaigns in 
+particular, you have a home base where you stow away unneeded
+supplies, and get to choose what to take with you and what to leave
+behind. It would be interesting to allow players that play several
+campaigns to have factories, to produce, and possibly sell, simple
+mech components, or even entire mechs, like armor and heat sinks.
+
+Something I never understood about BattleTech is the location limit
+on armor, while there is no such limit on the weapons mounted in
+the same locations. I do not see any reason for implementing these
+limits. By contrast, the total weight of all equipment should be limited 
+by the internal structure points of that section, rather than only armor.
+Being free to allocate as much armor as needed would solve the problem
+of insufficiently armored cockpits, too.
+
+Armor could be assigned and tracked specifically for different mech polygons,
+but this raises balancing problems with the weapons. Weapons that hit
+only a small portion of a target, like standard lasers, would behave much
+different from weapons that hit areas, like autocannons and LRMs.
+
+One option would be to assign every polygon the full armor value, the other
+would be to assign every polygon a percentage proportional to the polygon's
+area divided by the total area of that section. For fairness, the volume of a
+section would have to be proportional to the number of criticals used in that
+section.
+
+The user may move the mouse cursor freely on the viewscreen. All weapons
+follow the direction given in that manner as fast as they can. The arms follow
+faster, the torso slower. This could be made to depend on other things as well,
+like the moment of force, tonnage, actuator quality and damage. A targeting
+computer improves targeting by focusing the weapons at the depth of the 
+selected target, instead of all weapons aiming in parallel.
+
+Left, right and center torso's armor is split into front and rear. Every polygon
+that has an angle of less than 45 degrees against the rear vector uses rear
+armor, all others use front armor. It would be possible to display full armor
+allocations in white, unprotected areas in black, and all others in shades of grey
+in MechBay.
+
+======
+Texturing
+======
+
+It should be possible to create textures procedurally.
+Create random balls and test for collisions with the
+geometry. Create a colored blotch for every collision,
+and treat edges consistently.
+
+Here's how to do it:
+- User interface:
+  - Size of the grid
+  - Size of texture to create
+  - 2 base colors
+  - additional color pairs
+  - density of colors
+  - Size and form of color balls (sphere, sphere with transparent edges), 
+    plasma/Voronoi diagram, interpolation along axes, colored lines
+- Algorithm:
+  - Create grid in user-defined resolution
+  - Fill grid with base color according to user's wishes
+  - Create effects in grid
+  - Process all texels for all polygons:
+    - Transfer polygon corners to grid coordinates
+    - Express every texel as a linear combination of the polygon corners
+    - Access grid to compute a color for the pixel
+  - Save texture and texture coordinates
+  
+Advantages:
+- Easy to create a wide range of textures
+- Easy algorithm
+- Consistent treatment of edges
+
+Further improvements possible by baking in ambient occlusion.
+
+Layering textures:
+there can be generic textures matching terrain types. Every mech is
+assigned a generic terrain texture, then a mech-specific textures adds 
+details specific to this mech. This layering approach can be combined
+with the procedural approach above.
+
+===========
+Procedural Motion
+===========
+
+Currently, the walking animation isn't working well. 
+I want realistic gravity effects, and the animation
+should also work while the mech is submerged in
+water. The animation should match the walking/running
+speed, no feet sliding over the ground.
+
+======
+Mech Bay
+======
+
+Yup, an MW2 compatible Mech configurator. It should
+be capable of displaying costs and should support 
+limited inventory. In addition, it would be nice if mounted
+weapons would change the Mech's looks.
+
+======
+Networks
+======
+
+It's easier to implement a network protocol than writing good AI's
+to get things started. So perhaps it makes sense to focus on a 
+network game for a start. To prevent people from cheating, all
+damage and destruction resolution should not happen on a PC
+of participating player, but on a server. This is still prone to
+cheating by implementing bots, or sneaking in modified servers,
+but it raises the bar for cheating.

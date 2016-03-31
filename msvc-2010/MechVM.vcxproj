@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9F339631-F64A-4B02-926D-3CBEA731BD84}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>"c:\bjoern\devel\SDL-1.2.14\include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;Winmm.lib;comdlg32.lib;shell32.lib;"c:\Bjoern\devel\SDL-1.2.14\VisualC\SDL\Release\SDL.lib";"c:\Bjoern\devel\SDL-1.2.14\VisualC\SDLmain\Release\SDLmain.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)..\..\MechVM.exe</OutputFile>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>"c:\bjoern\devel\SDL-1.2.14\include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;Winmm.lib;comdlg32.lib;shell32.lib;"c:\Bjoern\devel\SDL-1.2.14\VisualC\SDL\Release\SDL.lib";"c:\Bjoern\devel\SDL-1.2.14\VisualC\SDLmain\Release\SDLmain.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)..\..\MechVM.exe</OutputFile>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Archive.cpp" />
+    <ClCompile Include="..\src\BipedMech.cpp" />
+    <ClCompile Include="..\src\Database_MW2.cpp" />
+    <ClCompile Include="..\src\LZdecode.cpp" />
+    <ClCompile Include="..\src\MechLab.cpp" />
+    <ClCompile Include="..\src\MechShell.cpp" />
+    <ClCompile Include="..\src\MechVM.cpp" />
+    <ClCompile Include="..\src\MechWarrior3ZBD.cpp" />
+    <ClCompile Include="..\src\MechWarriorIIPRJ.cpp" />
+    <ClCompile Include="..\src\MechWarriorInstallers.cpp" />
+    <ClCompile Include="..\src\MW2MechImporter.cpp" />
+    <ClCompile Include="..\src\MWBase.cpp" />
+    <ClCompile Include="..\src\QuadMech.cpp" />
+    <ClCompile Include="..\src\Vehicles.cpp" />
+    <ClCompile Include="..\src\dialogs.cpp" />
+    <ClCompile Include="..\src\GLButton.cpp" />
+    <ClCompile Include="..\src\GLComboBox.cpp" />
+    <ClCompile Include="..\src\GLContextMenu.cpp" />
+    <ClCompile Include="..\src\GLLabel.cpp" />
+    <ClCompile Include="..\src\GLLineEdit.cpp" />
+    <ClCompile Include="..\src\GLScrollbar.cpp" />
+    <ClCompile Include="..\src\GLSlider.cpp" />
+    <ClCompile Include="..\src\GLSplitter.cpp" />
+    <ClCompile Include="..\src\GLTableView.cpp" />
+    <ClCompile Include="..\src\GLWindow.cpp" />
+    <ClCompile Include="..\src\GLWindowContainer.cpp" />
+    <ClCompile Include="..\src\Toolbar.cpp" />
+    <ClCompile Include="..\src\Color.cpp" />
+    <ClCompile Include="..\src\Heightfield.cpp" />
+    <ClCompile Include="..\src\Mesh.cpp" />
+    <ClCompile Include="..\src\Mesh2.cpp" />
+    <ClCompile Include="..\src\MeshPolygon.cpp" />
+    <ClCompile Include="..\src\Point3D.cpp" />
+    <ClCompile Include="..\src\RenderableObject.cpp" />
+    <ClCompile Include="..\src\Texture.cpp" />
+    <ClCompile Include="..\src\TextureCompiler.cpp" />
+    <ClCompile Include="..\src\BGBase.cpp" />
+    <ClCompile Include="..\src\BGString.cpp" />
+    <ClCompile Include="..\src\Config.cpp" />
+    <ClCompile Include="..\src\FileCache.cpp" />
+    <ClCompile Include="..\src\FramerateCounter.cpp" />
+    <ClCompile Include="..\src\intersections.cpp" />
+    <ClCompile Include="..\src\ISO9660.cpp" />
+    <ClCompile Include="..\src\Matrix.cpp" />
+    <ClCompile Include="..\src\XMLTree.cpp" />
+    <ClCompile Include="..\src\MechSim.cpp" />
+    <ClCompile Include="..\src\VehicleAI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Archive.h" />
+    <ClInclude Include="..\src\BipedMech.h" />
+    <ClInclude Include="..\src\Database_MW2.h" />
+    <ClInclude Include="..\src\LZdecode.h" />
+    <ClInclude Include="..\src\MechLab.h" />
+    <ClInclude Include="..\src\MechShell.h" />
+    <ClInclude Include="..\src\MechVM.h" />
+    <ClInclude Include="..\src\MechWarrior3ZBD.h" />
+    <ClInclude Include="..\src\MechWarriorIIPRJ.h" />
+    <ClInclude Include="..\src\MechWarriorInstallers.h" />
+    <ClInclude Include="..\src\MW2MechImporter.h" />
+    <ClInclude Include="..\src\MWBase.h" />
+    <ClInclude Include="..\src\QuadMech.h" />
+    <ClInclude Include="..\src\Vehicles.h" />
+    <ClInclude Include="..\src\dialogs.h" />
+    <ClInclude Include="..\src\GLButton.h" />
+    <ClInclude Include="..\src\GLComboBox.h" />
+    <ClInclude Include="..\src\GLContextMenu.h" />
+    <ClInclude Include="..\src\GLLabel.h" />
+    <ClInclude Include="..\src\GLLineEdit.h" />
+    <ClInclude Include="..\src\GLScrollbar.h" />
+    <ClInclude Include="..\src\GLSlider.h" />
+    <ClInclude Include="..\src\GLSplitter.h" />
+    <ClInclude Include="..\src\GLTableView.h" />
+    <ClInclude Include="..\src\GLWindow.h" />
+    <ClInclude Include="..\src\GLWindowContainer.h" />
+    <ClInclude Include="..\src\Toolbar.h" />
+    <ClInclude Include="..\src\Color.h" />
+    <ClInclude Include="..\src\Heightfield.h" />
+    <ClInclude Include="..\src\Mesh.h" />
+    <ClInclude Include="..\src\Mesh2.h" />
+    <ClInclude Include="..\src\Mesh3.h" />
+    <ClInclude Include="..\src\MeshPolygon.h" />
+    <ClInclude Include="..\src\Point3D.h" />
+    <ClInclude Include="..\src\RenderableObject.h" />
+    <ClInclude Include="..\src\Texture.h" />
+    <ClInclude Include="..\src\TextureCompiler.h" />
+    <ClInclude Include="..\src\BGBase.h" />
+    <ClInclude Include="..\src\BGString.h" />
+    <ClInclude Include="..\src\BGVector.h" />
+    <ClInclude Include="..\src\Config.h" />
+    <ClInclude Include="..\src\FileCache.h" />
+    <ClInclude Include="..\src\FramerateCounter.h" />
+    <ClInclude Include="..\src\intersections.h" />
+    <ClInclude Include="..\src\ISO9660.h" />
+    <ClInclude Include="..\src\Matrix.h" />
+    <ClInclude Include="..\src\random.h" />
+    <ClInclude Include="..\src\SimpleFuncs.h" />
+    <ClInclude Include="..\src\XMLTree.h" />
+    <ClInclude Include="..\src\MechSim.h" />
+    <ClInclude Include="..\src\VehicleAI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Changelog.txt" />
+    <None Include="..\readme.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

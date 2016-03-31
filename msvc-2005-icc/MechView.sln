@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "MechVM", "MechView.icproj", "{4AD60D28-3A89-47F6-966B-B32CECACB55E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4AD60D28-3A89-47F6-966B-B32CECACB55E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4AD60D28-3A89-47F6-966B-B32CECACB55E}.Debug|Win32.Build.0 = Debug|Win32
+		{4AD60D28-3A89-47F6-966B-B32CECACB55E}.Release|Win32.ActiveCfg = Release|Win32
+		{4AD60D28-3A89-47F6-966B-B32CECACB55E}.Release|Win32.Build.0 = Release|Win32
+		{9F339631-F64A-4B02-926D-3CBEA731BD84}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9F339631-F64A-4B02-926D-3CBEA731BD84}.Release|Win32.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

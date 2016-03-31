@@ -1,0 +1,267 @@
+<campaign df1="net.prj" startRoom="Login">
+
+<room name="Login" background="PCX\NETDLL1.PCX">
+   <reg x1="29" y1="194" x2="124" y2="221" goto="MeetingHall" setvar="temp=1" setvar="maxTonnage=100"
+        setvar="timeofday=1" setvar="map=0" setvar="gravity=4" setvar="class=0" setvar="screenRes=1"
+        setvar="gameMode=hostTeam" setvar="clanMode=clanTeam" setvar="chassis=0" setvar="config=0"/>
+   <reg x1="141" y1="194" x2="238" y2="221" exec="quit"/>
+</room>
+
+<room name="MeetingHall" background="PCX\NETGAME1.PCX">
+   <reg x1="550" y1="106" x2="631" y2="187" goto="MeetingHall"/>
+   <reg x1="549" y1="202" x2="631" y2="281" goto="join"/>
+   <reg x1="550" y1="295" x2="632" y2="376" goto="%gameMode%"/>
+   <reg x1="550" y1="392" x2="632" y2="472" goto="quit"/>
+</room>
+
+<room name="hostFFA" background="PCX\NETMISS1.PCX">
+   <reg x1="545" y1="312" x2="633" y2="330" goto="MeetingHall"/>
+   <reg x1="546" y1="342" x2="633" y2="444" goto="clanFFA"/>
+   <reg x1="545" y1="456" x2="634" y2="473" exec="quit"/>
+   
+   <bar x1="109" y1="46" x2="219" y2="63" color="ff 00 00 60"/>
+
+   Map selection
+   <textBtn x1="112" y1="69" x2="334" y2="86" color="ff 00 00" 
+            select="map,Kufstein - Maze,Avon - King of the Hill,Setubal-Spire of Destiny,Outer Volta - Minefield,Ramsau - City,Alshain - Canyon,Graus - Ice Cavern,Yamarovka - Rolling Hills,Galuzza - Forest"/>
+   <reg x1="86" y1="67" x2="104" y2="88" setvar="map=%map%-1"/>
+   <reg x1="342" y1="67" x2="359" y2="88" setvar="map=%map%+1"/>
+   <reg x1="226" y1="45" x2="333" y2="59" goto="hostTeam" setvar="gameMode=hostTeam"  setvar="clanMode=clanTeam"/>
+
+   Checkboxes
+   <textBtn x1="455" y1="48" x2="463" y2="58" color="ff 00 00" select="regen,,x" setvar="regen=%regen%+1"/>
+   <textBtn x1="455" y1="72" x2="463" y2="82" color="ff 00 00" select="ammo,,x" setvar="ammo=%ammo%+1"/>
+   <textBtn x1="455" y1="96" x2="463" y2="106" color="ff 00 00" select="heat,,x" setvar="heat=%heat%+1"/>
+   <textBtn x1="455" y1="120" x2="463" y2="130" color="ff 00 00" select="splash,,x" setvar="splash=%splash%+1"/>
+   <textBtn x1="455" y1="144" x2="463" y2="154" color="ff 00 00" select="collision,,x" setvar="collision=%collision%+1"/>
+   <textBtn x1="455" y1="168" x2="463" y2="178" color="ff 00 00" select="radar,,x" setvar="radar=%radar%+1"/>
+
+   Max. tonnage
+   <textBtn x1="460" y1="195" x2="514" y2="206" color="ff ff ff" text="%maxTonnage%"/>
+   <textBtn x1="508" y1="195" x2="513" y2="206" color="ff ff ff" text="+" setvar="maxTonnage=%maxTonnage%+5" 
+            range="20,maxTonnage,100"/>
+   <textBtn x1="456" y1="195" x2="460" y2="206" color="ff ff ff" text="-" setvar="maxTonnage=%maxTonnage%-5"
+            range="20,maxTonnage,100"/>
+
+   Gravity
+   <textBtn x1="460" y1="219" x2="514" y2="230" color="ff ff ff" 
+            select="gravity,0.00,0.25,0.50,0.75,1.00,1.25,1.50,1.75,2.00,2.25,2.50,2.75,3.00,3.25,3.50,3.75,4.00"/>
+   <textBtn x1="508" y1="219" x2="513" y2="230" color="ff ff ff" text="+" setvar="gravity=%gravity%+1"
+            range="1,gravity,16"/>
+   <textBtn x1="456" y1="219" x2="460" y2="230" color="ff ff ff" text="-" setvar="gravity=%gravity%-1"
+            range="1,gravity,16"/>
+
+   Time of day
+   <textBtn x1="460" y1="243" x2="508" y2="253" color="ff ff ff" select="timeofday,Dawn,Day,Dusk,Night"/>
+   <textBtn x1="508" y1="243" x2="513" y2="253" color="ff ff ff" text="+" setvar="timeofday=%timeofday%+1"
+            range="0,timeofday,3"/>
+   <textBtn x1="456" y1="243" x2="460" y2="253" color="ff ff ff" text="-" setvar="timeofday=%timeofday%-1"
+            range="0,timeofday,3"/>
+
+   Temperature
+   <textBtn x1="460" y1="267" x2="508" y2="278" color="ff ff ff" select="temp,cold,norm.,hot"/>
+   <textBtn x1="508" y1="267" x2="513" y2="278" color="ff ff ff" text="+" setvar="temp=%temp%+1"
+            range="0,temp,2"/>
+   <textBtn x1="456" y1="267" x2="460" y2="278" color="ff ff ff" text="-" setvar="temp=%temp%-1"
+            range="0,temp,2"/>
+
+   Mech Classes
+   <textBtn x1="0" y1="500" x2="640" y2="520" color="00 00 00" 
+   select="class,Class 1: Energy Weapons only (Lasers and PPC's),Class 2: Stock Mechs - no customization,Class 3: Modified stock mechs,Class 4: Very limited ammo,Class 5: Limited ammo,Class 6: Unlimited in design,Class 7: No guided missiles - SSRM or LRM" setvar="class=%class%+1"/>
+</room>
+
+<room name="hostTeam" background="PCX\NETMISS1.PCX">
+   <reg x1="545" y1="312" x2="633" y2="330" goto="MeetingHall"/>
+   <reg x1="546" y1="342" x2="633" y2="444" goto="clanTeam"/>
+   <reg x1="545" y1="456" x2="634" y2="473" exec="quit"/>
+   <reg x1="109" y1="46" x2="218" y2="63" goto="hostFFA" setvar="gameMode=hostFFA"  setvar="clanMode=clanFFA"/>
+   <bar x1="226" y1="46" x2="336" y2="63" color="ff 00 00 60"/>
+
+   Map selection
+   <textBtn x1="112" y1="69" x2="334" y2="86" color="ff 00 00" 
+            select="map,Carse - Capture the Flag,Hainfeld - Defend/Destroy,Derf - Hit & Run,La Grave-Steal the Plans,Tinaca - Scavenger Hunt"/>
+   <reg x1="86" y1="67" x2="104" y2="88" setvar="map=%map%-1"/>
+   <reg x1="342" y1="67" x2="359" y2="88" setvar="map=%map%+1"/>
+
+   Checkboxes
+   <textBtn x1="455" y1="48" x2="463" y2="58" color="ff 00 00" select="regen,,x" setvar="regen=%regen%+1"/>
+   <textBtn x1="455" y1="72" x2="463" y2="82" color="ff 00 00" select="ammo,,x" setvar="ammo=%ammo%+1"/>
+   <textBtn x1="455" y1="96" x2="463" y2="106" color="ff 00 00" select="heat,,x" setvar="heat=%heat%+1"/>
+   <textBtn x1="455" y1="120" x2="463" y2="130" color="ff 00 00" select="splash,,x" setvar="splash=%splash%+1"/>
+   <textBtn x1="455" y1="144" x2="463" y2="154" color="ff 00 00" select="collision,,x" setvar="collision=%collision%+1"/>
+   <textBtn x1="455" y1="168" x2="463" y2="178" color="ff 00 00" select="radar,,x" setvar="radar=%radar%+1"/>
+
+   Max. tonnage
+   <textBtn x1="460" y1="195" x2="514" y2="206" color="ff ff ff" text="%maxTonnage%"/>
+   <textBtn x1="508" y1="195" x2="513" y2="206" color="ff ff ff" text="+" setvar="maxTonnage=%maxTonnage%+5" 
+            range="20,maxTonnage,100"/>
+   <textBtn x1="456" y1="195" x2="460" y2="206" color="ff ff ff" text="-" setvar="maxTonnage=%maxTonnage%-5"
+            range="20,maxTonnage,100"/>
+
+   Gravity
+   <textBtn x1="460" y1="219" x2="514" y2="230" color="ff ff ff" 
+            select="gravity,0.00,0.25,0.50,0.75,1.00,1.25,1.50,1.75,2.00,2.25,2.50,2.75,3.00,3.25,3.50,3.75,4.00"/>
+   <textBtn x1="508" y1="219" x2="513" y2="230" color="ff ff ff" text="+" setvar="gravity=%gravity%+1"
+            range="1,gravity,16"/>
+   <textBtn x1="456" y1="219" x2="460" y2="230" color="ff ff ff" text="-" setvar="gravity=%gravity%-1"
+            range="1,gravity,16"/>
+
+   Time of day
+   <textBtn x1="460" y1="243" x2="508" y2="253" color="ff ff ff" select="timeofday,Dawn,Day,Dusk,Night"/>
+   <textBtn x1="508" y1="243" x2="513" y2="253" color="ff ff ff" text="+" setvar="timeofday=%timeofday%+1"
+            range="0,timeofday,3"/>
+   <textBtn x1="456" y1="243" x2="460" y2="253" color="ff ff ff" text="-" setvar="timeofday=%timeofday%-1"
+            range="0,timeofday,3"/>
+
+   Temperature
+   <textBtn x1="460" y1="267" x2="508" y2="278" color="ff ff ff" select="temp,cold,norm.,hot"/>
+   <textBtn x1="508" y1="267" x2="513" y2="278" color="ff ff ff" text="+" setvar="temp=%temp%+1"
+            range="0,temp,2"/>
+   <textBtn x1="456" y1="267" x2="460" y2="278" color="ff ff ff" text="-" setvar="temp=%temp%-1"
+            range="0,temp,2"/>
+
+   Mech Classes
+   <textBtn x1="0" y1="500" x2="640" y2="520" color="00 00 00" 
+   select="class,Class 1: Energy Weapons only (Lasers and PPC's),Class 2: Stock Mechs - no customization,Class 3: Modified stock mechs,Class 4: Very limited ammo,Class 5: Limited ammo,Class 6: Unlimited in design,Class 7: No guided missiles - SSRM or LRM" setvar="class=%class%+1"/>
+</room>
+
+<room name="join">
+   <textBtn x1="0" y1="0" x2="640" y2="480" color="ff ff ff" text="Please Wait..." goto="clan"/>
+</room>
+
+<room name="clanFFA">
+   <img inArchive="PCX\NETTEAM1.PCX" x1="0" y1="0" x2="540" y2="300"/>
+   <img inArchive="PCX\BUTTONS.PCX" x1="540" y1="0" x2="640" y2="480"/>
+   <img inArchive="PCX\CHATTEAM.PCX" x1="0" y1="300" x2="540" y2="480"/>
+   <reg x1="548" y1="9" x2="632" y2="41" goto="%gameMode%"/>
+   <reg x1="548" y1="55" x2="632" y2="137" goto="clan"/>
+   <reg x1="548" y1="150" x2="632" y2="233" goto="mission"/>
+   <reg x1="548" y1="246" x2="632" y2="328" goto="mech"/>
+   <reg x1="548" y1="342" x2="632" y2="423" goto="dropship"/>
+   <reg x1="548" y1="436" x2="632" y2="472" exec="quit"/>
+
+   <textBtn x1="55" y1="80" x2="315" y2="90" text="Skyfaller"/>
+   <textBtn x1="55" y1="101" x2="315" y2="111" text="Sir MMPD Radickg"/>
+   <textBtn x1="55" y1="121" x2="315" y2="131" text="1234568901234567890123456789g"/>
+   <textBtn x1="55" y1="142" x2="315" y2="152" text="Col. Kellg"/>
+   <textBtn x1="55" y1="162" x2="315" y2="172" text="Col. Kellg"/>
+   <textBtn x1="55" y1="183" x2="315" y2="193" text="Col. Kellg"/>
+   <textBtn x1="55" y1="203" x2="315" y2="213" text="Col. Kellg"/>
+   <textBtn x1="55" y1="224" x2="315" y2="234" text="Col. Kellg"/>
+</room>
+
+<room name="clanTeam">
+   <img inArchive="PCX\NETTEAM2.PCX" x1="0" y1="0" x2="540" y2="300"/>
+   <img inArchive="PCX\BUTTONS.PCX" x1="540" y1="0" x2="640" y2="480"/>
+   <img inArchive="PCX\CHATTEAM.PCX" x1="0" y1="300" x2="540" y2="480"/>
+   <reg x1="548" y1="9" x2="632" y2="41" goto="%gameMode%"/>
+   <reg x1="548" y1="55" x2="632" y2="137" goto="%clanMode%"/>
+   <reg x1="548" y1="150" x2="632" y2="233" goto="mission"/>
+   <reg x1="548" y1="246" x2="632" y2="328" goto="mech"/>
+   <reg x1="548" y1="342" x2="632" y2="423" goto="dropship"/>
+   <reg x1="548" y1="436" x2="632" y2="472" exec="quit"/>
+
+   <textBtn x1="27" y1="109" x2="237" y2="121" text="Skyfaller"/>
+   <textBtn x1="27" y1="130" x2="237" y2="142" text="Sir MMPD Radickg"/>
+   <textBtn x1="27" y1="150" x2="237" y2="152" text="1234568901234567890123456789g"/>
+   <textBtn x1="27" y1="171" x2="237" y2="183" text="Col. Kellg"/>
+   <textBtn x1="27" y1="191" x2="237" y2="203" text="Col. Kellg"/>
+   <textBtn x1="27" y1="212" x2="237" y2="224" text="Col. Kellg"/>
+   <textBtn x1="27" y1="232" x2="237" y2="244" text="Col. Kellg"/>
+   <textBtn x1="27" y1="253" x2="237" y2="265" text="Col. Kellg"/>
+</room>
+
+<room name="mission">
+   <img inArchive="PCX\NETSUMM3.PCX" x1="0" y1="0" x2="540" y2="300"/>
+   <img inArchive="PCX\BUTTONS.PCX" x1="540" y1="0" x2="640" y2="480"/>
+   <img inArchive="PCX\CHATTEAM.PCX" x1="0" y1="300" x2="540" y2="480"/>
+   <reg x1="548" y1="9" x2="632" y2="41" goto="%gameMode%"/>
+   <reg x1="548" y1="55" x2="632" y2="137" goto="%clanMode%"/>
+   <reg x1="548" y1="150" x2="632" y2="233" goto="mission"/>
+   <reg x1="548" y1="246" x2="632" y2="328" goto="mech"/>
+   <reg x1="548" y1="342" x2="632" y2="423" goto="dropship"/>
+   <reg x1="548" y1="436" x2="632" y2="472" exec="quit"/>
+
+   Map selection
+   <textBtn x1="96" y1="52" x2="272" y2="64" color="ff 00 00" 
+            select="map,Kufstein - Maze,Avon - King of the Hill,Setubal-Spire of Destiny,Outer Volta - Minefield,Ramsau - City,Alshain - Canyon,Graus - Ice Cavern,Yamarovka - Rolling Hills,Galuzza - Forest"/>
+
+   Checkboxes
+   <textBtn x1="378" y1="47" x2="386" y2="57" color="ff 00 00" select="regen,,x"/>
+   <textBtn x1="378" y1="70" x2="386" y2="80" color="ff 00 00" select="ammo,,x"/>
+   <textBtn x1="378" y1="94" x2="386" y2="104" color="ff 00 00" select="heat,,x"/>
+   <textBtn x1="378" y1="117" x2="386" y2="127" color="ff 00 00" select="splash,,x"/>
+   <textBtn x1="378" y1="141" x2="386" y2="151" color="ff 00 00" select="collision,,x"/>
+   <textBtn x1="378" y1="164" x2="386" y2="174" color="ff 00 00" select="radar,,x"/>
+
+   Max. tonnage
+   <textBtn x1="378" y1="191" x2="418" y2="202" color="ff ff ff" text="%maxTonnage%"/>
+
+   Gravity
+   <textBtn x1="378" y1="214" x2="418" y2="225" color="ff ff ff" 
+            select="gravity,0.00,0.25,0.50,0.75,1.00,1.25,1.50,1.75,2.00,2.25,2.50,2.75,3.00,3.25,3.50,3.75,4.00"/>
+
+   Time of day
+   <textBtn x1="378" y1="237" x2="418" y2="248" color="ff ff ff" select="timeofday,Dawn,Day,Dusk,Night"/>
+
+   Temperature
+   <textBtn x1="378" y1="261" x2="418" y2="272" color="ff ff ff" select="temp,cold,norm.,hot"/>
+
+   Mech Classes
+   <textBtn x1="0" y1="500" x2="640" y2="520" color="00 00 00" 
+   select="class,Class 1: Energy Weapons only (Lasers and PPC's),Class 2: Stock Mechs - no customization,Class 3: Modified stock mechs,Class 4: Very limited ammo,Class 5: Limited ammo,Class 6: Unlimited in design,Class 7: No guided missiles - SSRM or LRM"/>
+</room>
+
+<room name="mech">
+   <img inArchive="PCX\NETLAB1.PCX" x1="0" y1="0" x2="540" y2="300"/>
+   <img inArchive="PCX\BUTTONS.PCX" x1="540" y1="0" x2="640" y2="480"/>
+   <img inArchive="PCX\CHATTEAM.PCX" x1="0" y1="300" x2="540" y2="480"/>
+   <reg x1="548" y1="9" x2="632" y2="41" goto="%gameMode%"/>
+   <reg x1="548" y1="55" x2="632" y2="137" goto="%clanMode%"/>
+   <reg x1="548" y1="150" x2="632" y2="233" goto="mission"/>
+   <reg x1="548" y1="246" x2="632" y2="328" goto="mech"/>
+   <reg x1="548" y1="342" x2="632" y2="423" goto="dropship"/>
+   <reg x1="548" y1="436" x2="632" y2="472" exec="quit"/>
+   
+   <reg x1="180" y1="255" x2="208" y2="289" setvar="chassis=%chassis%-1"/>
+   <reg x1="210" y1="258" x2="237" y2="287" setvar="config=%config%-1"/>
+   <reg x1="301" y1="258" x2="327" y2="287" setvar="config=%config%+1"/>
+   <reg x1="330" y1="255" x2="357" y2="289" setvar="chassis=%chassis%+1"/>
+   
+   <textBtn x1="100" y1="100" x2="300" y2="110" select="chassis,Elemental,Firemoth,Tarantula,Kit Fox,Jenner,Nova,Stormcrow,Mad Dog,Hellbringer,Rifleman,Summoner,Timber Wolf,Gargoyle,Warhammer,Warhawk,Marauder,Battlemaster,Dire Wolf"/>
+   <textBtn x1="100" y1="120" x2="300" y2="130" select="config,(primary),(Alt. Conf. A),(Alt. Conf. B),(Alt. Conf. C)"/>
+</room>
+
+<room name="dropship">
+   <img inArchive="PCX\NETLNCH.PCX" x1="0" y1="0" x2="540" y2="300"/>
+   <img inArchive="PCX\BUTTONS.PCX" x1="540" y1="0" x2="640" y2="480"/>
+   <img inArchive="PCX\CHATTEAM.PCX" x1="0" y1="300" x2="540" y2="480"/>
+   <reg x1="548" y1="9" x2="632" y2="41" goto="%gameMode%"/>
+   <reg x1="548" y1="55" x2="632" y2="137" goto="%clanMode%"/>
+   <reg x1="548" y1="150" x2="632" y2="233" goto="mission"/>
+   <reg x1="548" y1="246" x2="632" y2="328" goto="mech"/>
+   <reg x1="548" y1="342" x2="632" y2="423" goto="dropship"/>
+   <reg x1="548" y1="436" x2="632" y2="472" exec="quit"/>
+   <reg x1="145" y1="233" x2="392" y2="276" goto="results"/>
+
+   <textBtn x1="122" y1="56" x2="382" y2="66" text="Skyfaller"/>
+   <textBtn x1="122" y1="77" x2="382" y2="87" text="Sir MMPD Radickg"/>
+   <textBtn x1="122" y1="97" x2="382" y2="107" text="1234568901234567890123456789g"/>
+   <textBtn x1="122" y1="118" x2="382" y2="128" text="Col. Kellg"/>
+   <textBtn x1="122" y1="139" x2="382" y2="149" text="Col. Kellg"/>
+   <textBtn x1="122" y1="159" x2="382" y2="169" text="Col. Kellg"/>
+   <textBtn x1="122" y1="180" x2="382" y2="190" text="Col. Kellg"/>
+   <textBtn x1="122" y1="201" x2="382" y2="211" text="Col. Kellg"/>
+   
+   Screen Resolution
+   <textBtn x1="449" y1="200" x2="507" y2="214" select="screenRes,320x200,640x480,800x600,1024x768" 
+            setvar="screenRes=%screenRes%+1"/>
+</room>
+
+<room name="results">
+   <img inArchive="PCX\SCORES.PCX" x1="0" y1="0" x2="540" y2="300"/>
+   <img inArchive="PCX\BUTTONS.PCX" x1="540" y1="0" x2="640" y2="480"/>
+   <img inArchive="PCX\CHATTEAM.PCX" x1="0" y1="300" x2="540" y2="480"/>
+</room>
+
+</campaign>
