@@ -2,11 +2,11 @@
 #define ExceptionBase_H
 
 #include <sstream>
-#include "BGString.h"
 
 class ExceptionBase {
 public:
    ExceptionBase (const char* msg);
+   ExceptionBase (const ExceptionBase& other);
 
    void append (const char* additionalText);
 

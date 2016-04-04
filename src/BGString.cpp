@@ -189,6 +189,10 @@ ExceptionBase::ExceptionBase (const char* msg)
 	this->msg << msg;
 }
 
+ExceptionBase::ExceptionBase (const ExceptionBase& other) {
+	this->msg << other.msg.str();
+}
+
 void ExceptionBase::append (const char* additionalText)
 {
 	this->msg << additionalText;
