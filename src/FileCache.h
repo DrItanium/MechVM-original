@@ -11,33 +11,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "abstraction.h"
 #include "BGString.h"
 
-typedef short int16;
-
-#ifdef _WIN32
-#include <windows.h>
-#include <direct.h>
-inline void bgmkdir (const char* newDir)
-{ _mkdir (newDir); }
-#else
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <dirent.h>
-typedef int64_t INT64;
-typedef u_int32_t DWORD;
-typedef u_int16_t WORD;
-inline void bgmkdir (const char* newDir)
-{ mkdir (newDir, 0777); }
-#endif
-
-#ifdef _WIN32
-typedef DWORD FileOffset;
-#else
-typedef size_t FileOffset;
-#endif
-typedef FileOffset CacheOffset;
-typedef FILE* FileHandle;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Header definition for a diff file
@@ -47,36 +23,6 @@ struct DiffHeader {
    DWORD size1, size2, diffs, reserved;
 };
 
-////////////////////////////////////////////////////////////////////////////////
-// Low-level functions and OS abstractions
-
-// Test if file exists
-bool fileExists (const char* FN);
-
-// Copy single file
-void copyFile (const TCHAR* sourceFN, const TCHAR* targetFN);
-
-#ifdef _WIN32
-#include <direct.h>
-#else
-inline void mkdir (const TCHAR* newDir)
-//{ CreateDirectory (newDir, NULL); } // WIN32 has mkdir
-{ mkdir (newDir, 0777); }
-#endif
-
-#ifndef _WIN32
-inline void DeleteFile (const TCHAR* fn)
-{ remove (fn); }
-#endif
-
-// Return file size, given the file's name
-INT64 getFileSize (const TCHAR* FN);
-
-// Patch targetFN using a previously produced diffFile
-bool patch(const TCHAR* diffFile, const TCHAR* targetFN);
-
-// Delete all files in dirName
-void deleteTree (const TCHAR* dirName);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class FileCache
@@ -118,7 +64,7 @@ class FileCache: public VirtualClass {
       bool enlargeFile (FileOffset NewSize);
 
       // Check if handle is valid
-      inline bool isHandleValid() const
+       bool isHandleValid() const
       {
       #ifdef _WIN32
       return (m_FileHandle != INVALID_HANDLE_VALUE);
@@ -156,13 +102,13 @@ class FileCache: public VirtualClass {
       bool read (FileOffset offset, char* buf, FileOffset count);
       bool write (FileOffset offset, const char* buf, FileOffset count);
       bool readLine (FileOffset& offset, BGString& line);
-      inline int readInt32 (FileOffset offset)
+       int readInt32 (FileOffset offset)
       {
          int i = 0;
          read (offset, (char*) (&i), 4);
          return i;
       }
-      inline DWORD readDWord (FileOffset offset)
+       DWORD readDWord (FileOffset offset)
       {
          DWORD result;
          read (offset, (char*) (&result), 4);
@@ -211,29 +157,29 @@ public:
    void resize (size_t newSize);
 
    // Read access
-   inline unsigned char getUByte (size_t offset) const
+    unsigned char getUByte (size_t offset) const
    { return buf[offset]; }
-   inline unsigned char getByte (size_t offset) const
+    unsigned char getByte (size_t offset) const
    { return ((unsigned char) (buf[offset])); }
-   inline WORD getWord (size_t offset) const
+    WORD getWord (size_t offset) const
    { return *((WORD*) (&buf[offset])); }
-   inline int getInt32 (size_t offset) const
+    int getInt32 (size_t offset) const
    { return *((int*) (&buf[offset])); }
-   inline DWORD getDWord (size_t offset) const
+    DWORD getDWord (size_t offset) const
    { return *((DWORD*) (&buf[offset])); }
-   inline int16 getInt16 (size_t offset) const
+    int16 getInt16 (size_t offset) const
    { return *((int16*) (&buf[offset])); }
-   inline float getFloat (size_t offset) const
+    float getFloat (size_t offset) const
    { return * ((float*) (&buf[offset])); }
 
    // Get pointer into the buffer
-   inline unsigned char* getPtr (size_t offset = 0)
+    unsigned char* getPtr (size_t offset = 0)
    { return &buf[offset]; }
-   inline const unsigned char* getPtr (size_t offset = 0) const
+    const unsigned char* getPtr (size_t offset = 0) const
    { return &buf[offset]; }
 
    // Get size
-   inline size_t getSize () const
+    size_t getSize () const
    { return size; }
 
    // Load from file
@@ -243,16 +189,16 @@ public:
    bool saveToFile (const TCHAR* FN);
 
    // Set byte, word or dword
-   inline void setByte (size_t offset, unsigned char newVal)
+    void setByte (size_t offset, unsigned char newVal)
    { buf[offset] = newVal; }
-   inline void setWord(size_t offset, WORD newVal)
+    void setWord(size_t offset, WORD newVal)
    { (WORD&) (buf[offset]) = newVal; }
-   inline void setDWord(size_t offset, DWORD newVal)
+    void setDWord(size_t offset, DWORD newVal)
    { (DWORD&) (buf[offset]) = newVal; }
 
    // Copy data into the buffer
-   //inline bool copy (size_t offset, const void* _buf, size_t count)
-   inline bool copy (size_t offset, const unsigned char* _buf, size_t count)
+   // bool copy (size_t offset, const void* _buf, size_t count)
+    bool copy (size_t offset, const unsigned char* _buf, size_t count)
    {
       if (offset+count <= size) {
          //memcpy ((void*)(buf[offset]), _buf, count);
@@ -264,7 +210,7 @@ public:
    }
 
    // Append
-   inline void append (const unsigned char* buf, size_t bufSize)
+    void append (const unsigned char* buf, size_t bufSize)
    {
       size_t offset = size;
       resize (size+bufSize);
@@ -275,7 +221,7 @@ public:
    size_t replaceAll (const char* oldStr, const char* newStr);
 
    // Fill block with byte
-   inline void fill (size_t offset, size_t count, char byte)
+    void fill (size_t offset, size_t count, char byte)
    {
       if (offset > size)
          return;

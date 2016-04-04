@@ -127,10 +127,10 @@ void copyFiles (const TCHAR* source, const TCHAR* /*mask*/, const TCHAR* target)
    }
 
    while ((dp=readdir(dir)) != NULL) {
-      BGFilePath sourceFN = source;
+      BGFilePath<TCHAR> sourceFN = source;
       sourceFN += dp->d_name;
 
-      BGFilePath targetFN = target;
+      BGFilePath<TCHAR> targetFN = target;
       targetFN += dp->d_name;
 
       //printf("Copying %s to %s\n", sourceFN.getChars(), targetFN.getChars());

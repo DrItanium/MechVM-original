@@ -2,7 +2,7 @@
 // FileCache.cpp
 // Copyright Bjoern Ganster 2005-2011
 ////////////////////////////////////////////////////////////////////////////////
-
+#include "abstraction.h"
 #include "FileCache.h"
 
 //#include <iostream>
@@ -27,18 +27,18 @@ using namespace std;
 //#define DebugOut printf
 //#define DebugOut 
 
-inline void debugOut (const char*)
+ void debugOut (const char*)
 {
 }
 
-inline void reportRange (FileOffset , FileOffset)
+ void reportRange (FileOffset , FileOffset)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Elementary file operations
 
-inline FileHandle fileOpen (const TCHAR* FileName, bool readOnly)
+ FileHandle fileOpen (const TCHAR* FileName, bool readOnly)
 {
    FileHandle newHandle;
    #ifdef UNICODE
@@ -64,23 +64,23 @@ inline FileHandle fileOpen (const TCHAR* FileName, bool readOnly)
    return newHandle; 
 }
 
-inline void fileClose (FileHandle& file)
+ void fileClose (FileHandle& file)
 { fclose (file); }
 
-inline size_t fileRead (FileHandle& file, void* buf, size_t BytesToRead)
+ size_t fileRead (FileHandle& file, void* buf, size_t BytesToRead)
 { return fread (buf, 1, BytesToRead, file); }
 
-inline size_t fileWrite (FileHandle& file, const void* buf, size_t BytesToWrite)
+ size_t fileWrite (FileHandle& file, const void* buf, size_t BytesToWrite)
 { return fwrite (buf, 1, BytesToWrite, file); }
 
-inline bool fileSeek (FileHandle& file, size_t newPos, int)
+ bool fileSeek (FileHandle& file, size_t newPos, int)
 { 
    int res = fseek (file, (long) newPos, SEEK_SET);
    return (res == 0);
 }
 
 //#ifdef LINUX
-inline long _getFileSize (FileHandle& file)
+ long _getFileSize (FileHandle& file)
 {
    if (file != NULL) {
       long oldPos = ftell (file);
@@ -94,7 +94,7 @@ inline long _getFileSize (FileHandle& file)
 //#endif
 
 /*#ifdef WIN32
-inline long GetFileSize (FileHandle& file)
+ long GetFileSize (FileHandle& file)
 {
    DWORD FileSizeHi;
    DWORD m_FileSize = GetFileSize (file, &FileSizeHi);

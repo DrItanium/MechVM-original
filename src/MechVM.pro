@@ -1,4 +1,5 @@
 HEADERS = \
+abstraction.h \
 Archive.h \
 BGBase.h \
 BGString.h \

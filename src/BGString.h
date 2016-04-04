@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <sstream>
 
+#include "abstraction.h"
 #include "BGBase.h"
 #ifndef _WIN32
 #include <wchar.h> // for wcslen, wide character string length computation
@@ -17,20 +18,6 @@
 #endif
 #include "BGVector.h"
 
-////////////////////////////////////////////////////////////////////////////////
-// Constants
-
-// Operating system path separator
-#ifdef WIN32
-const char OSPathSep = '\\';
-const TCHAR newLine[] = {0x0d, 0x0a};
-#else
-const char OSPathSep = '/';
-const TCHAR newLine[] = "\n";
-#endif
-
-const TCHAR tabChar = 9;
-const char ciphers[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -901,7 +888,7 @@ public:
          return false;
       //size_t newLen = getFileSize (FN);
       struct stat fstat;
-      stat (FN, fstat);
+      stat (FN, &fstat);
       setLength (fstat.st_size);
       size_t read = fread (this->chars, 1, length, f);
       fclose (f);

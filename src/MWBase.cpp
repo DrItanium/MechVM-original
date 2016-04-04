@@ -196,7 +196,7 @@ const TCHAR* getMWFileExt (int FileTypeID)
       case FT_MW3_555:
          return "555";
       default:
-         return FT_Unsupported;
+         return nullptr;
    }
 }
 

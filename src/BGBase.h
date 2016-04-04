@@ -23,17 +23,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // Linux does not define TCHAR
-
-#ifdef _WIN32
-#include <windows.h>
-#else
-#ifdef UNICODE
-typedef wchar_t TCHAR;
-#pragma message "Producing unicode executable"
-#else
-typedef char TCHAR;
-#endif
-#endif
+#include "abstraction.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Virtual class: introduces memory profiling and message passing to all
