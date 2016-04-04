@@ -301,7 +301,7 @@ bool FileCache::create (const TCHAR* FileName)
       remove (FileName);
    m_FileHandle = fileOpen (FileName, m_isReadOnly);
    if (m_FileHandle != NULL) {
-      m_FileSize = bgGetFileSize (m_FileHandle);
+      m_FileSize = _getFileSize(m_FileHandle);
       result = true;
       CloseFileOnDestroy = true;
    }
@@ -328,7 +328,7 @@ bool FileCache::openReadOnly (const TCHAR* FileName)
    #else
    m_FileHandle = fopen (FileName, "rb");
    if (m_FileHandle != NULL) {
-      m_FileSize = bgGetFileSize (m_FileHandle);
+      m_FileSize = _getFileSize(m_FileHandle);
       result = true;
       CloseFileOnDestroy = true;
    }
@@ -1425,7 +1425,7 @@ FileList::~FileList ()
 
 void FileList::getStats(const char* fn)
 {
-   BGFilePath fullFN = m_path.getChars();
+   BGFilePath<char> fullFN = m_path.getChars();
    fullFN += fn;
    struct stat s;
    stat(fullFN.getChars(), &s);
@@ -1660,7 +1660,11 @@ void deleteTree (const TCHAR* dirName)
             next += list.getFileName();
             if (list.isDirectory()) {
                deleteTree(next.getChars());
+#if _WIN32
                _rmdir(next.getChars());
+#else
+			   rmdir(next.getChars());
+#endif
             } else {
                DeleteFile(next.getChars());
             }
