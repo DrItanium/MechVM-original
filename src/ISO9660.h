@@ -15,7 +15,7 @@
 
 class ISO9660: public MWArchive {
 public:
-	using MWArchive::MWArchive;
+	virtual ~ISO9660();
    // Open file
    virtual bool open (const TCHAR* PRJFN, bool readOnly = true);
 

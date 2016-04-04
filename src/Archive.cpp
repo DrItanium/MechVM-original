@@ -284,3 +284,10 @@ MemoryBlock* MWArchive::getMemoryBlock (size_t fileNum)
    } else
       return NULL;
 }
+
+MWArchive::MWArchive() {
+
+}
+
+MWArchive::~MWArchive() {
+}

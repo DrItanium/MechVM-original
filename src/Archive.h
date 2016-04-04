@@ -20,6 +20,8 @@ class MemoryBlock;
 
 class MWArchive: public VirtualClass {
 public:
+	MWArchive();
+	virtual ~MWArchive();
    // Open file
    virtual bool open (const TCHAR* PRJFN, bool readOnly = true) = 0;
 

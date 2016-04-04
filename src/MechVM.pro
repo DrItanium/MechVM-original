@@ -49,7 +49,8 @@ TextureCompiler.h \
 Toolbar.h \
 VehicleAI.h \
 Vehicles.h \
-XMLTree.h
+XMLTree.h \
+ISO9660.h
 
 SOURCES = \
 Archive.cpp \
@@ -97,7 +98,8 @@ TextureCompiler.cpp \
 Toolbar.cpp \
 VehicleAI.cpp \
 Vehicles.cpp \
-XMLTree.cpp
+XMLTree.cpp \
+ISO9660.cpp 
 
 TARGET = ../mechvm
 

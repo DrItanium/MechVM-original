@@ -123,7 +123,11 @@ bool ISO9660::isDirectory (int index) const
 
 ///////////////////////////////////////////////////////////////////////////////
 // Read directory entries
+#include <cstdint>
 
+typedef uint8_t UINT8;
+typedef uint16_t UINT16;
+typedef uint32_t UINT32;
 #pragma pack (1)
 struct ISO_9660_Directory_Entry {
    UINT8 entryLen;
@@ -182,4 +186,8 @@ bool ISO9660::readDirectory(int sector, int dirSize)
 
    delete data;
    return readSuccess;
+}
+
+ISO9660::~ISO9660() {
+	m_isDirectory.clear();
 }
