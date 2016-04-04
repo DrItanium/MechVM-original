@@ -3,6 +3,7 @@
 // Copyright Bjoern Ganster 2005-2010
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "ExceptionBase.h"
 #include "BGString.h"
 
 #ifdef WIN32

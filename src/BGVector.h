@@ -7,8 +7,7 @@
 
 #ifndef BGVector__H
 #define BGVector__H
-
-#include "BGString.h" // For ExceptionBase, also includes BGBase.h
+#include "ExceptionBase.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Template BGVector

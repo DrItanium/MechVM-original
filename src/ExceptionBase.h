@@ -2,15 +2,17 @@
 #define ExceptionBase_H
 
 #include <sstream>
+#include "BGString.h"
 
 class ExceptionBase {
 public:
-	std::stringstream msg;
-   ExceptionBase (const char* msg = "");
+   ExceptionBase (const char* msg);
 
    void append (const char* additionalText);
 
    void appendInt (int i);
+public:
+	std::stringstream msg;
 };
 #endif // end ExceptionBase_H
 

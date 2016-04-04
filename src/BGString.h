@@ -15,7 +15,6 @@
 #include <wchar.h> // for wcslen, wide character string length computation
 #include <unistd.h>
 #endif
-#include "ExceptionBase.h"
 #include "BGVector.h"
 
 ////////////////////////////////////////////////////////////////////////////////
