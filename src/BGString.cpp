@@ -182,3 +182,20 @@ bool isRelativePath (const TCHAR* path)
    return path[0] != '/';
    #endif
 }
+
+ExceptionBase::ExceptionBase (const char* msg)
+{
+	this->msg << msg;
+}
+
+void ExceptionBase::append (const char* additionalText)
+{
+	this->msg << additionalText;
+}
+
+void ExceptionBase::appendInt (int i)
+{
+	this->msg << i;
+}
+
+

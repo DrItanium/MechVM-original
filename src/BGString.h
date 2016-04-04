@@ -8,13 +8,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sstream>
 
 #include "BGBase.h"
 #ifndef _WIN32
 #include <wchar.h> // for wcslen, wide character string length computation
 #include <unistd.h>
 #endif
-
+#include "ExceptionBase.h"
 #include "BGVector.h"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +33,6 @@ const TCHAR newLine[] = "\n";
 const TCHAR tabChar = 9;
 const char ciphers[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-class ExceptionBase;
 
 ///////////////////////////////////////////////////////////////////////////////
 // bgstrlen, version with MaxChars
@@ -1012,7 +1012,7 @@ public:
    void operator += (const C* element)
    {
       if (!placeNextRelative) {
-         appendNoDups (PathSep);
+         this->appendNoDups (PathSep);
       } else {
          placeNextRelative = false;
       }
@@ -1164,25 +1164,6 @@ TCHAR lowerCase (TCHAR a);
 ////////////////////////////////////////////////////////////////////////////////
 // Exception base
 
-class ExceptionBase {
-public:
-   BGString msg;
-
-   ExceptionBase (const char* msg = "")
-   {
-      this->msg = msg;
-   };
-
-    void append (const char* additionalText)
-   {
-      msg += additionalText;
-   }
-
-    void appendInt (int i)
-   {
-      msg.appendInt (i);
-   }
-};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Logging

@@ -266,9 +266,10 @@ const int BGVector_BGVector_PolygonVectorID = 45;
 const int WeaponsLockerID = 46;
 const int Mesh3ID = 47;
 const int WeaponSystemID = 48;
-//const int TextureID = 49;
+const int Point3f_ID = 49;
+//const int TextureID = 50;
 
-const int ClassIDCount = 50;
+const int ClassIDCount = 51;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Message IDs
