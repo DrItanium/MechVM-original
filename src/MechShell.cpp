@@ -140,12 +140,12 @@ Texture* MechShell::loadImageFromArchive(const char* filePath)
 
       if (fileSize > archive->getArchiveSize()) {
          printf ("Can't load file\n");
-         return false;
+         return nullptr;
       }
 
       if (!archive->getFileChunk(fileNum, 0, block->getPtr(), fileSize)) {
          delete block;
-         return false;
+         return nullptr;
       }
    } else if (fn.startsWith("2|")) {
       fn = (const char*) (&filePath[2]);
@@ -164,17 +164,17 @@ Texture* MechShell::loadImageFromArchive(const char* filePath)
 
       if (fileSize > archive2->getArchiveSize()) {
          printf ("Can't load file\n");
-         return false;
+         return nullptr;
       }
 
       if (!archive2->getFileChunk(fileNum, 0, block->getPtr(), fileSize)) {
          delete block;
-         return false;
+         return nullptr;
       }
    }
 
    if (block == NULL)
-      return false;
+      return nullptr;
 
    // Load image
    switch (getFileTypeFromExtension(fn.getChars())) {

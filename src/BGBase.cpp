@@ -231,7 +231,7 @@ bool loadLangFile (const TCHAR* FileName)
    while (i < langFile->getSize()) {
       char c = langFile->getByte(i);
       if (c == 0x0a || c == 0x0d) {
-         if (i == strEnd+1) {
+         if (i == (size_t)(strEnd+1)) {
             int len = strEnd-strStart+1;
             char* line = new char [len+1];
             memcpy((void*) line, (void*) langFile->getPtr(strStart), len);

@@ -351,18 +351,18 @@ void setWeaponAmmoPair(int wID, int aID)
 {
    int i = 0;
    MWWeapons& w = weapons[wID];
-   while (w.AmmoTypes[i] != 0 && i < MaxAmmoTypes)
+   while (w.AmmoTypes[i] != 0 && i < (int)MaxAmmoTypes)
       ++i;
-   if (i < MaxAmmoTypes)
+   if (i < (int)MaxAmmoTypes)
       w.AmmoTypes[i] = aID;
    else
       printf ("%s has too many ammo types\n", w.longName);
 
    int j = 0;
    MWWeapons& a = weapons[aID];
-   while (a.AmmoTypes[j] != 0 && j < MaxAmmoTypes)
+   while (a.AmmoTypes[j] != 0 && j < (int)MaxAmmoTypes)
       ++j;
-   if (j < MaxAmmoTypes)
+   if (j < (int)MaxAmmoTypes)
       a.AmmoTypes[j] = wID;
    else
       printf ("%s has too few weapon types\n", a.longName);

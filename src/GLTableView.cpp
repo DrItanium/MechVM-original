@@ -200,7 +200,7 @@ void GLTableView::render(int wx, int wy, int w, int h)
       while (row < rowCount && (int) y < height) {
          // Highlight selection
          y = rowStart[row]-startY;
-         if (row == selectedRow) {
+         if (row == (size_t)selectedRow) {
             int nextY = y;
             if (row < rowCount-1)
                nextY = rowStart[row+1]-startY;
