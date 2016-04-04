@@ -176,7 +176,7 @@ protected:
    C* chars;
    size_t length, reserved;
 
-   inline size_t preferredReserve (size_t newLen)
+    size_t preferredReserve (size_t newLen)
    { return 2*newLen + 10; }
    //{ return 2*newLen + 30; }
 
@@ -204,29 +204,29 @@ public:
    // Destructor
    virtual ~TBGString()
    {
-      if (chars != NULL)
-         delete chars;
+      if (this->chars != NULL)
+         delete this->chars;
    }
 
    // Get length
-   inline size_t getLength () const 
+    size_t getLength () const 
    { return length; }
 
    // Get characters
-   inline const C* getChars() const 
+    const C* getChars() const 
    {
-      if (chars != NULL)
-         return chars; 
+      if (this->chars != NULL)
+         return this->chars; 
       else
          return "";
    }
 
    // Secure get character at index (using operator[] on getChars is faster but 
    // less secure)
-   inline bool getChar (size_t index, C& c) const
+    bool getChar (size_t index, C& c) const
    {
       if (index < length) {
-         c = chars[index];
+         c = this->chars[index];
          return true;
       } else
          return false;
@@ -236,14 +236,14 @@ public:
    void setLength (size_t newlen)
    {
       if (newlen < reserved) {
-         chars[newlen] = 0;
+         this->chars[newlen] = 0;
       } else if (newlen > reserved) {
          C* newchars = new C [newlen+2]; // lower added values cause heap corruption?
-         memcpy (newchars, chars, sizeof(C) * reserved);
+         memcpy (newchars, this->chars, sizeof(C) * reserved);
          reserved = newlen+1;
-         if (chars != NULL)
-            delete chars;
-         chars = newchars;
+         if (this->chars != NULL)
+            delete this->chars;
+         this->chars = newchars;
       }
       length = newlen;
    }
@@ -253,19 +253,19 @@ public:
    {
       if (newReserve > reserved) {
          C* newchars = new C [newReserve+1];
-         memcpy (newchars, chars, sizeof(C) * length);
+         memcpy (newchars, this->chars, sizeof(C) * length);
          reserved = newReserve+1;
-         if (chars != NULL)
-            delete chars;
-         chars = newchars;
+         if (this->chars != NULL)
+            delete this->chars;
+         this->chars = newchars;
       }
    }
 
    // Set character at index
-   inline void setChar (size_t index, char c)
+    void setChar (size_t index, char c)
    {
       if (index < length)
-         chars[index] = c;
+         this->chars[index] = c;
    }
 
    // Assignment operators
@@ -278,7 +278,7 @@ public:
       if (str != NULL) {
          size_t newlen = strlen (str);
          setLength(newlen);
-         bgstrcpymax(chars, str, length+1);
+         bgstrcpymax(this->chars, str, length+1);
       } else {
          clear();
       }
@@ -288,7 +288,7 @@ public:
       if (str != NULL) {
          length = bgstrlen (str);
          setLength(length);
-         bgstrcpymax(chars, str, length+1);
+         bgstrcpymax(this->chars, str, length+1);
       } else {
          clear();
       }
@@ -296,8 +296,8 @@ public:
    void operator = (C c)
    {
       setLength(1);
-      chars[0] = c;
-      chars[1] = 0;
+      this->chars[0] = c;
+      this->chars[1] = 0;
    }
 
    // Appending operators
@@ -320,8 +320,8 @@ public:
       size_t oldLen = length;
       if (length+1 >= reserved)
          setLength (2*length+10);
-      chars[oldLen] = (C) c;
-      chars[oldLen+1] = 0;
+      this->chars[oldLen] = (C) c;
+      this->chars[oldLen+1] = 0;
       length = oldLen+1;
    }
    void operator += (wchar_t c)
@@ -329,8 +329,8 @@ public:
       size_t oldLen = length;
       if (length >= reserved)
          setLength (2*length+10);
-      chars[oldLen] = (C) c;
-      chars[oldLen+1] = 0;
+      this->chars[oldLen] = (C) c;
+      this->chars[oldLen+1] = 0;
       length = oldLen+1;
    }
    void operator += (TBGString<char>& str)
@@ -387,21 +387,21 @@ public:
    // Remove whitespace at the beginning of a string
    void removeLeadingWhitespace()
    {
-      if (chars != NULL) {
+      if (this->chars != NULL) {
          size_t deleted = 0;
-         while (  (chars[deleted] == ' '
-                || chars[deleted] == 0x09
-                || chars[deleted] == 0x0a
-                || chars[deleted] == 0x0d)
+         while (  (this->chars[deleted] == ' '
+                || this->chars[deleted] == 0x09
+                || this->chars[deleted] == 0x0a
+                || this->chars[deleted] == 0x0d)
          &&     deleted < length)
          {
             ++deleted;
          }
 
          if (deleted > 0) {
-            memcpy(chars, chars+deleted, length-deleted);
+            memcpy(this->chars, this->chars+deleted, length-deleted);
             length -= deleted;
-            chars[length] = 0;
+            this->chars[length] = 0;
          }
       }
    }
@@ -411,16 +411,16 @@ public:
    {
       // Memory for removed whitespace is not released but kept
       // as reserved memory
-      if (chars != NULL) {
-         while (  (chars[length-1] == ' '
-                || chars[length-1] == 0x09
-                || chars[length-1] == 0x0a
-                || chars[length-1] == 0x0d)
+      if (this->chars != NULL) {
+         while (  (this->chars[length-1] == ' '
+                || this->chars[length-1] == 0x09
+                || this->chars[length-1] == 0x0a
+                || this->chars[length-1] == 0x0d)
          &&     length > 0)
          {
             length--;
          }
-         chars[length] = 0;
+         this->chars[length] = 0;
       }
    }
 
@@ -429,7 +429,7 @@ public:
    {
       size_t i = 0;
       while (i < getLength()) {
-         if (chars[i] == c) {
+         if (this->chars[i] == c) {
             pos = i;
             return true;
          } else
@@ -445,7 +445,7 @@ public:
       assert (step != 0);
 
       while ((step > 0 && i <= stop) || (step < 0 && i >= stop)) {
-         if (chars[i] == c) {
+         if (this->chars[i] == c) {
             pos = i;
             return true;
          }
@@ -499,11 +499,11 @@ public:
             assert (currCipher <= getLength());
             size_t cipher = value % ((size_t) base);
             char cipherChar = ciphers[cipher];
-            chars[currCipher] = cipherChar;
+            this->chars[currCipher] = cipherChar;
             value = value / ((size_t) base);
             currCipher--;
          }
-         chars[length] = 0;
+         this->chars[length] = 0;
       } else
          operator+= ('0');
    }
@@ -551,7 +551,7 @@ public:
 
    // Test if string equals another string
    bool equals (const C* other) const
-   { return (bgstrcmp(chars, other) == 0); }
+   { return (bgstrcmp(this->chars, other) == 0); }
 
    // Create size string, e.g. 1024MB for 1024*1024
    void appendSizeStr (size_t size)
@@ -604,7 +604,7 @@ public:
    {
       if (index < length)
          // If length > 0, then chars should not be NULL
-         return chars[index];
+         return this->chars[index];
       else {
          /*ExceptionBase e ("Access to index ");
          e.appendInt ((int) index);
@@ -618,7 +618,7 @@ public:
    {
       if (index < length)
          // If length > 0, then chars should not be NULL
-         return chars[index];
+         return this->chars[index];
       else {
          /*ExceptionBase e ("Access to index ");
          e.appendInt ((int) index);
@@ -639,13 +639,13 @@ public:
       if (length > 0) {
          int v;
 
-         if (chars[i] == '-') {
+         if (this->chars[i] == '-') {
             negate = true;
             i++;
          }
          
          while (i < length) {
-            switch (chars[i]) {
+            switch (this->chars[i]) {
                case '0': v = 0; break;
                case '1': v = 1; break;
                case '2': v = 2; break;
@@ -690,7 +690,7 @@ public:
       if (length == 0)
          return false;
       size_t pos = 0;
-      bool negate = (chars[0] == '-');
+      bool negate = (this->chars[0] == '-');
       if (negate)
          pos++;
 
@@ -700,30 +700,30 @@ public:
       bool stop = false;
       while (!stop)
       {
-         if (chars[pos] >= '0'
-         &&  chars[pos] <= '9')
+         if (this->chars[pos] >= '0'
+         &&  this->chars[pos] <= '9')
          {
-            result = 10 * result + (chars[pos] -'0');
+            result = 10 * result + (this->chars[pos] -'0');
             pos++;
             if (pos >= length)
                stop = true;
          } else {
-            if (chars[pos] == '.')
+            if (this->chars[pos] == '.')
                stop = true;
             else
                return false;
          }
       }
 
-      if (chars[pos] == '.') {
+      if (this->chars[pos] == '.') {
          pos++;
          double factor = 0.1;
          while (pos < length)
          {
-            if (chars[pos] >= '0'
-            &&  chars[pos] <= '9') 
+            if (this->chars[pos] >= '0'
+            &&  this->chars[pos] <= '9') 
             {
-            result = result + factor * (chars[pos] -'0');
+            result = result + factor * (this->chars[pos] -'0');
             factor = factor / 10;
             pos++;
             } else
@@ -739,24 +739,24 @@ public:
 
    // Clear string
    void clear ()
-   { length = 0; if (chars != NULL) chars[0] = 0; }
+   { length = 0; if (this->chars != NULL) this->chars[0] = 0; }
 
    // Print string to stdout
-   inline void print () const
-   //{ log (chars); }
+    void print () const
+   //{ log (this->chars); }
    #ifdef UNICODE
-   { wprintf (chars); }
+   { wprintf (this->chars); }
    #else
-   { printf (chars); }
+   { printf (this->chars); }
    #endif
 
    // Print string to stdout and add a line feed
-   inline void printLn () const
-   //{ logLn (chars); }
+    void printLn () const
+   //{ logLn (this->chars); }
    #ifdef UNICODE
-   { wprintf (chars); wprintf (newLine); }
+   { wprintf (this->chars); wprintf (newLine); }
    #else
-   { printf (chars); printf (newLine); }
+   { printf (this->chars); printf (newLine); }
    #endif
 
    // Assign word from another string, returns offset of end of word
@@ -806,7 +806,7 @@ public:
       size_t i = 0;
       size_t base = length-otherLen;
       while (correct && i < otherLen) {
-         if (buf[i] == chars[base+i])
+         if (buf[i] == this->chars[base+i])
             i++;
          else
             correct = false;
@@ -831,7 +831,7 @@ public:
       if (olen > getLength())
          return false;
 
-      return (memcmp(chars, other, olen) == 0);
+      return (memcmp(this->chars, other, olen) == 0);
    }
 
    // Save string to file
@@ -845,7 +845,7 @@ public:
       #endif
       if (f == NULL) 
          return false;
-      size_t written = fwrite (chars, 1, length, f);
+      size_t written = fwrite (this->chars, 1, length, f);
       fclose (f);
       return written == length;
    }
@@ -858,7 +858,7 @@ public:
       if (h == INVALID_HANDLE_VALUE)
          return false;
       DWORD written;
-      WriteFile (h, chars, length*sizeof(C), &written, NULL);
+      WriteFile (h, this->chars, length*sizeof(C), &written, NULL);
       CloseHandle (h);
       return (written == length*sizeof(C));
    }
@@ -876,7 +876,7 @@ public:
       DWORD size, read;
       size = GetFileSize(h, NULL);
       setLength(size / sizeof(C));
-      ReadFile (h, chars, size, &read, NULL);
+      ReadFile (h, this->chars, size, &read, NULL);
       CloseHandle (h);
       return (read == size);
    }
@@ -890,7 +890,7 @@ public:
       DWORD size, read;
       size = GetFileSize(h, NULL);
       setLength(size / sizeof(C));
-      ReadFile (h, chars, size, &read, NULL);
+      ReadFile (h, this->chars, size, &read, NULL);
       CloseHandle (h);
       return (read == size);
    }
@@ -904,7 +904,7 @@ public:
       struct stat fstat;
       stat (FN, fstat);
       setLength (fstat.st_size);
-      size_t read = fread (chars, 1, length, f);
+      size_t read = fread (this->chars, 1, length, f);
       fclose (f);
       return (read == length);
    }
@@ -927,9 +927,9 @@ public:
    {
       size_t result = 0;
 
-      if (chars != NULL) {
+      if (this->chars != NULL) {
          for (size_t i = 0; i < length; ++i) 
-            if (chars[i] == c)
+            if (this->chars[i] == c)
                ++result;
       }
 
@@ -944,7 +944,7 @@ public:
       // Find start of newline, not including whitespace
       do {
          if (offset < getLength()) {
-            char c = chars[offset];
+            char c = this->chars[offset];
             if (c == 0x09
             ||  c == 0x0a
             ||  c == 0x0d
@@ -961,7 +961,7 @@ public:
       done = false;
       do {
          if (offset < getLength()) {
-            char c = chars[offset];
+            char c = this->chars[offset];
             if (c == 0x0a
             ||  c == 0x0d)
             {
@@ -1037,27 +1037,27 @@ public:
       if (sizeof(C) == 1) {
          DWORD newLen = GetCurrentDirectoryA(0, NULL);
          setReserve(newLen+1);
-         GetCurrentDirectoryA(reserved, chars);
+         GetCurrentDirectoryA(reserved, this->chars);
       } else {
          DWORD newLen = GetCurrentDirectoryW(0, NULL);
          setReserve(newLen+1);
-         GetCurrentDirectoryW(reserved, (wchar_t*) chars);
+         GetCurrentDirectoryW(reserved, (wchar_t*) this->chars);
       }
       #else
-      while (get_current_dir_name (chars, reserved) == NULL) {
+      while (get_current_dir_name (this->chars, reserved) == NULL) {
          setReserve (2*reserved);
       }
       #endif
-      length = bgstrlen(chars);
+      this->length = bgstrlen(this->chars);
    }
 
    bool changeExtension (const char* newExt)
    {
       bool result = false;
 
-      if (length > 0) {
+      if (this->length > 0) {
          size_t pos;
-         if (bgstrrscan(chars, '.', length-1, 0, pos)) {
+         if (bgstrrscan(this->chars, '.', this->length-1, 0, pos)) {
             setLength(pos+1);
             placeNextRelative = true;
             operator += (newExt);
@@ -1070,7 +1070,7 @@ public:
 
    bool exists () const
    {
-      return fileExists(chars);
+      return fileExists(this->chars);
    }
 private:
    C PathSep;
@@ -1109,7 +1109,7 @@ public:
 
 
    // Get string
-   inline const C* get (size_t index) const
+    const C* get (size_t index) const
    {
       if (index < m_strings.getSize())
          return m_strings[index];
@@ -1118,7 +1118,7 @@ public:
    }
 
    // Set string
-   inline void set (size_t index, const C* newStr)
+    void set (size_t index, const C* newStr)
    {
       if (index >= m_strings.getSize())
          m_strings.setSize(index+1);
@@ -1132,13 +1132,13 @@ public:
    }
 
    // Add string
-   inline void add (const C* newStr)
+    void add (const C* newStr)
    {
       set (m_strings.getSize(), newStr);
    }
 
    // Get size
-   inline size_t getSize() const
+    size_t getSize() const
    { return m_strings.getSize(); }
 private:
    BGVector <C*, BGVector_string_ID> m_strings;
@@ -1173,12 +1173,12 @@ public:
       this->msg = msg;
    };
 
-   inline void append (const char* additionalText)
+    void append (const char* additionalText)
    {
       msg += additionalText;
    }
 
-   inline void appendInt (int i)
+    void appendInt (int i)
    {
       msg.appendInt (i);
    }
@@ -1228,13 +1228,13 @@ public:
    {
    }
 
-   inline const TCHAR* get () const
+    const TCHAR* get () const
    { return value.getChars(); }
 
-   inline void set (const char* newVal)
+    void set (const char* newVal)
    { value = newVal; }
 
-   inline void set (const BGString& newVal)
+    void set (const BGString& newVal)
    { value = newVal; }
 
 private:
