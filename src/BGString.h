@@ -235,12 +235,12 @@ public:
    // Set string length
    void setLength (size_t newlen)
    {
-      if (newlen < reserved) {
+      if (newlen < this->reserved) {
          this->chars[newlen] = 0;
-      } else if (newlen > reserved) {
+      } else if (newlen > this->reserved) {
          C* newchars = new C [newlen+2]; // lower added values cause heap corruption?
-         memcpy (newchars, this->chars, sizeof(C) * reserved);
-         reserved = newlen+1;
+         memcpy (newchars, this->chars, sizeof(C) * this->reserved);
+         this->reserved = newlen+1;
          if (this->chars != NULL)
             delete this->chars;
          this->chars = newchars;
@@ -251,10 +251,10 @@ public:
    // Set string reserve
    void setReserve (size_t newReserve)
    {
-      if (newReserve > reserved) {
+      if (newReserve > this->reserved) {
          C* newchars = new C [newReserve+1];
          memcpy (newchars, this->chars, sizeof(C) * length);
-         reserved = newReserve+1;
+         this->reserved = newReserve+1;
          if (this->chars != NULL)
             delete this->chars;
          this->chars = newchars;
@@ -318,7 +318,7 @@ public:
    void operator += (char c)
    {
       size_t oldLen = length;
-      if (length+1 >= reserved)
+      if (length+1 >= this->reserved)
          setLength (2*length+10);
       this->chars[oldLen] = (C) c;
       this->chars[oldLen+1] = 0;
@@ -327,7 +327,7 @@ public:
    void operator += (wchar_t c)
    {
       size_t oldLen = length;
-      if (length >= reserved)
+      if (length >= this->reserved)
          setLength (2*length+10);
       this->chars[oldLen] = (C) c;
       this->chars[oldLen+1] = 0;
@@ -1037,15 +1037,15 @@ public:
       if (sizeof(C) == 1) {
          DWORD newLen = GetCurrentDirectoryA(0, NULL);
          setReserve(newLen+1);
-         GetCurrentDirectoryA(reserved, this->chars);
+         GetCurrentDirectoryA(this->reserved, this->chars);
       } else {
          DWORD newLen = GetCurrentDirectoryW(0, NULL);
          setReserve(newLen+1);
-         GetCurrentDirectoryW(reserved, (wchar_t*) this->chars);
+         GetCurrentDirectoryW(this->reserved, (wchar_t*) this->chars);
       }
       #else
-      while (get_current_dir_name (this->chars, reserved) == NULL) {
-         setReserve (2*reserved);
+      while (get_current_dir_name (this->chars, this->reserved) == NULL) {
+         setReserve (2*this->reserved);
       }
       #endif
       this->length = bgstrlen(this->chars);
@@ -1058,7 +1058,7 @@ public:
       if (this->length > 0) {
          size_t pos;
          if (bgstrrscan(this->chars, '.', this->length-1, 0, pos)) {
-            setLength(pos+1);
+            this->setLength(pos+1);
             placeNextRelative = true;
             operator += (newExt);
             result = true;

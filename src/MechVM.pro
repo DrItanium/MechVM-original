@@ -102,3 +102,6 @@ TARGET = ../mechvm
 INCLUDEPATH = /opt/gnome/include/gtk-1.2 /opt/gnome/include/glib-2.0 /opt/gnome/include/glib-1.2 /opt/gnome/lib/glib-2.0/include
 
 LIBS	+= -lGLU -lglut `gtk-config --cflags --libs` -lSDL
+
+QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CFLAGS += -std=c99
